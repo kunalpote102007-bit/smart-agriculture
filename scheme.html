@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Government Schemes | Smart Agriculture Platform</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+.scheme-page{
+    max-width:1180px;
+    margin:auto;
+}
+
+.scheme-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:24px;
+}
+
+.scheme-header h1{
+    font-size:28px;
+    color:#17231c;
+    margin:0 0 6px;
+}
+
+.scheme-header p{
+    color:#78847d;
+    font-size:12px;
+    margin:0;
+}
+
+.update-status{
+    font-size:10px;
+    color:#69766e;
+}
+
+.update-status i{
+    color:#25804a;
+}
+
+.overview{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:22px;
+}
+
+.overview-card{
+    background:#fff;
+    border:1px solid #e1e9e4;
+    border-radius:13px;
+    padding:17px;
+    box-shadow:0 5px 18px rgba(25,50,35,.05);
+}
+
+.overview-icon{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    background:#eaf5ee;
+    color:#237a45;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:10px;
+}
+
+.overview-card h3{
+    font-size:20px;
+    color:#1b2921;
+    margin:0;
+}
+
+.overview-card p{
+    color:#7d8982;
+    font-size:10px;
+    margin:4px 0 0;
+}
+
+.filter-box{
+    background:#fff;
+    border:1px solid #e1e9e4;
+    border-radius:13px;
+    padding:17px;
+    margin-bottom:24px;
+    box-shadow:0 5px 18px rgba(25,50,35,.05);
+}
+
+.filter-grid{
+    display:grid;
+    grid-template-columns:1.7fr 1fr 1fr;
+    gap:10px;
+}
+
+.input-box{
+    position:relative;
+}
+
+.input-box i{
+    position:absolute;
+    left:13px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#237a45;
+    font-size:12px;
+}
+
+.input-box input,
+.input-box select{
+    width:100%;
+    height:42px;
+    border:1px solid #dfe7e2;
+    border-radius:8px;
+    padding:0 12px 0 36px;
+    outline:none;
+    color:#26342c;
+    background:#fff;
+    font-size:11px;
+}
+
+.input-box input:focus,
+.input-box select:focus{
+    border-color:#237a45;
+}
+
+.reset-btn{
+    margin-top:10px;
+    border:0;
+    background:none;
+    color:#237a45;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+}
+
+.section-title h2{
+    margin:0;
+    font-size:19px;
+    color:#1b2921;
+}
+
+.section-title span{
+    font-size:10px;
+    color:#7d8982;
+}
+
+.scheme-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.scheme-card{
+    background:#fff;
+    border:1px solid #e0e8e3;
+    border-radius:14px;
+    padding:19px;
+    box-shadow:0 5px 18px rgba(25,50,35,.05);
+    transition:.2s;
+}
+
+.scheme-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 26px rgba(25,50,35,.09);
+}
+
+.card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+}
+
+.scheme-title{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.scheme-icon{
+    width:43px;
+    height:43px;
+    flex-shrink:0;
+    border-radius:10px;
+    background:#eaf5ee;
+    color:#237a45;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+}
+
+.scheme-title h3{
+    margin:0;
+    font-size:14px;
+    color:#1b2921;
+    line-height:1.4;
+}
+
+.scheme-title small{
+    display:block;
+    margin-top:3px;
+    color:#8a958f;
+    font-size:9px;
+}
+
+.status{
+    padding:6px 9px;
+    border-radius:20px;
+    font-size:8px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.open{
+    background:#eaf7ee;
+    color:#237a45;
+}
+
+.seasonal{
+    background:#fff7df;
+    color:#9b7313;
+}
+
+.description{
+    margin:15px 0;
+    color:#69766e;
+    font-size:10.5px;
+    line-height:1.7;
+}
+
+.scheme-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.info-item{
+    background:#f7f9f8;
+    border-radius:8px;
+    padding:9px;
+}
+
+.info-item strong{
+    display:block;
+    color:#237a45;
+    font-size:9px;
+    margin-bottom:3px;
+}
+
+.info-item span{
+    color:#68756d;
+    font-size:9px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+    margin-bottom:15px;
+}
+
+.tag{
+    background:#f1f5f2;
+    color:#68756d;
+    padding:5px 7px;
+    border-radius:5px;
+    font-size:8px;
+}
+
+.card-footer{
+    display:flex;
+    gap:7px;
+    border-top:1px solid #edf1ee;
+    padding-top:13px;
+}
+
+.apply-btn,
+.details-btn{
+    flex:1;
+    height:36px;
+    border-radius:7px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    font-size:9px;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.apply-btn{
+    background:#237a45;
+    color:white;
+    border:0;
+}
+
+.apply-btn:hover{
+    background:#195f37;
+}
+
+.details-btn{
+    background:#f0f5f2;
+    color:#237a45;
+    border:1px solid #dfe9e3;
+}
+
+.details-btn:hover{
+    background:#e7f1ea;
+}
+
+.official{
+    margin-top:9px;
+    text-align:center;
+    color:#7d8982;
+    font-size:8px;
+}
+
+.official i{
+    color:#237a45;
+}
+
+.no-result{
+    display:none;
+    text-align:center;
+    background:#fff;
+    border:1px solid #e1e9e4;
+    border-radius:13px;
+    padding:45px 20px;
+}
+
+.no-result i{
+    font-size:27px;
+    color:#a2ada7;
+    margin-bottom:10px;
+}
+
+.no-result h3{
+    margin:0 0 5px;
+    font-size:15px;
+}
+
+.no-result p{
+    margin:0;
+    color:#7d8982;
+    font-size:10px;
+}
+
+.notice{
+    margin-top:20px;
+    padding:14px 16px;
+    background:#f5f8f6;
+    border:1px solid #e1e9e4;
+    border-radius:10px;
+    color:#69766e;
+    font-size:9px;
+    line-height:1.7;
+}
+
+.notice i{
+    color:#237a45;
+    margin-right:5px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(9,25,16,.55);
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.modal-box{
+    width:100%;
+    max-width:540px;
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    position:relative;
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+.close{
+    position:absolute;
+    right:17px;
+    top:13px;
+    border:0;
+    background:none;
+    color:#68756d;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.modal-box h2{
+    margin:0 30px 18px 0;
+    color:#1b2921;
+    font-size:19px;
+}
+
+.modal-row{
+    padding:12px 0;
+    border-bottom:1px solid #edf1ee;
+}
+
+.modal-row:last-child{
+    border-bottom:0;
+}
+
+.modal-row strong{
+    display:block;
+    color:#237a45;
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+.modal-row span{
+    color:#68756d;
+    font-size:10px;
+    line-height:1.7;
+}
+
+.steps{
+    display:grid;
+    gap:7px;
+}
+
+.step{
+    background:#f5f8f6;
+    padding:9px;
+    border-radius:7px;
+    color:#68756d;
+    font-size:9px;
+}
+
+.step b{
+    color:#237a45;
+    margin-right:5px;
+}
+
+@media(max-width:900px){
+
+    .overview{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .filter-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filter-grid .input-box:first-child{
+        grid-column:1/-1;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .scheme-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+    }
+
+    .scheme-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:520px){
+
+    .overview{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filter-grid{
+        grid-template-columns:1fr;
+    }
+
+    .filter-grid .input-box:first-child{
+        grid-column:auto;
+    }
+
+    .card-head{
+        flex-direction:column;
+    }
+
+    .scheme-info{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<button id="menuBtn" class="menu-btn">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+
+<div class="sidebar">
+
+<h2>
+<i class="fa-solid fa-seedling"></i>
+Smart Agri
+</h2>
+
+<ul>
+
+<li>
+<a href="dashboard.html">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</a>
+</li>
+
+<li>
+<a href="weather.html">
+<i class="fa-solid fa-cloud-sun"></i>
+Weather
+</a>
+</li>
+
+<li>
+<a href="crop.html">
+<i class="fa-solid fa-leaf"></i>
+Crop Upload
+</a>
+</li>
+
+<li>
+<a href="disease.html">
+<i class="fa-solid fa-bug"></i>
+Disease
+</a>
+</li>
+
+<li>
+<a href="solution.html">
+<i class="fa-solid fa-pills"></i>
+Solution
+</a>
+</li>
+
+<li>
+<a href="market.html">
+<i class="fa-solid fa-chart-line"></i>
+Market
+</a>
+</li>
+
+<li>
+<a href="scheme.html" class="active">
+<i class="fa-solid fa-building-columns"></i>
+Government Scheme
+</a>
+</li>
+
+<li>
+<a href="profile.html">
+<i class="fa-solid fa-user"></i>
+Profile
+</a>
+</li>
+
+<li>
+<a href="#" id="logoutBtn">
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+</a>
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>Government Schemes</h1>
+
+<div class="top-right">
+
+<input
+id="globalSearch"
+placeholder="Search...">
+
+<button id="darkBtn">
+🌙 Dark Mode
+</button>
+
+</div>
+
+</div>
+
+
+<div class="scheme-page">
+
+
+<div class="scheme-header">
+
+<div>
+
+<h1>
+<i class="fa-solid fa-building-columns"></i>
+Farmer Government Schemes
+</h1>
+
+<p>
+Explore farmer welfare schemes and access official government portals.
+</p>
+
+</div>
+
+<div class="update-status">
+
+<i class="fa-solid fa-circle-check"></i>
+Portal information available
+
+</div>
+
+</div>
+
+
+<div class="overview">
+
+<div class="overview-card">
+
+<div class="overview-icon">
+<i class="fa-solid fa-list-check"></i>
+</div>
+
+<h3>10</h3>
+<p>Available Schemes</p>
+
+</div>
+
+
+<div class="overview-card">
+
+<div class="overview-icon">
+<i class="fa-solid fa-circle-check"></i>
+</div>
+
+<h3>8</h3>
+<p>Open / Available</p>
+
+</div>
+
+
+<div class="overview-card">
+
+<div class="overview-icon">
+<i class="fa-solid fa-landmark"></i>
+</div>
+
+<h3>2</h3>
+<p>Government Levels</p>
+
+</div>
+
+
+<div class="overview-card">
+
+<div class="overview-icon">
+<i class="fa-solid fa-link"></i>
+</div>
+
+<h3>10</h3>
+<p>Official Portals</p>
+
+</div>
+
+</div>
+
+
+<div class="filter-box">
+
+<div class="filter-grid">
+
+<div class="input-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+id="schemeSearch"
+type="text"
+placeholder="Search scheme or benefit...">
+
+</div>
+
+
+<div class="input-box">
+
+<i class="fa-solid fa-landmark"></i>
+
+<select id="levelFilter">
+
+<option value="all">All Government Levels</option>
+<option value="central">Central Government</option>
+<option value="maharashtra">Maharashtra Government</option>
+
+</select>
+
+</div>
+
+
+<div class="input-box">
+
+<i class="fa-solid fa-filter"></i>
+
+<select id="categoryFilter">
+
+<option value="all">All Categories</option>
+<option value="income">Income Support</option>
+<option value="insurance">Crop Insurance</option>
+<option value="soil">Soil</option>
+<option value="market">Market</option>
+<option value="irrigation">Irrigation</option>
+<option value="mechanization">Mechanization</option>
+<option value="horticulture">Horticulture</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<button class="reset-btn" onclick="resetFilters()">
+
+<i class="fa-solid fa-rotate-left"></i>
+Reset Filters
+
+</button>
+
+</div>
+
+
+<div class="section-title">
+
+<h2>Available Schemes</h2>
+
+<span id="resultCount">10 schemes</span>
+
+</div>
+
+
+<div class="scheme-grid" id="schemeGrid">
+
+
+<div class="scheme-card"
+data-level="central"
+data-category="income"
+data-search="pm kisan samman nidhi income farmer financial support">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-indian-rupee-sign"></i>
+</div>
+
+<div>
+
+<h3>PM-KISAN Samman Nidhi</h3>
+<small>Government of India</small>
+
+</div>
+
+</div>
+
+<span class="status open">
+● OPEN
+</span>
+
+</div>
+
+<p class="description">
+Income support scheme for eligible landholding farmer families through Direct Benefit Transfer.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Income Support</span>
+</div>
+
+<div class="info-item">
+<strong>Mode</strong>
+<span>Direct Benefit Transfer</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Farmer Support</span>
+<span class="tag">DBT</span>
+<span class="tag">eKYC</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://www.pmkisan.gov.in/"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Official Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('pmkisan')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="maharashtra"
+data-category="income"
+data-search="namo shetkari mahasanman nidhi maharashtra farmer income">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-hand-holding-heart"></i>
+</div>
+
+<div>
+
+<h3>Namo Shetkari Mahasanman Nidhi</h3>
+<small>Maharashtra Government</small>
+
+</div>
+
+</div>
+
+<span class="status open">
+● OPEN
+</span>
+
+</div>
+
+<p class="description">
+Maharashtra farmer support initiative available through the state DBT ecosystem.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Farmer Support</span>
+</div>
+
+<div class="info-item">
+<strong>Platform</strong>
+<span>MahaDBT</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Maharashtra</span>
+<span class="tag">DBT</span>
+<span class="tag">Farmer</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://mahadbt.maharashtra.gov.in/"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+MahaDBT Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('namo')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="central"
+data-category="insurance"
+data-search="pmfby pradhan mantri fasal bima yojana crop insurance">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+
+<div>
+
+<h3>Pradhan Mantri Fasal Bima Yojana</h3>
+<small>Government of India</small>
+
+</div>
+
+</div>
+
+<span class="status seasonal">
+● SEASONAL
+</span>
+
+</div>
+
+<p class="description">
+Crop insurance support against notified crop losses and specified agricultural risks.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Crop Insurance</span>
+</div>
+
+<div class="info-item">
+<strong>Coverage</strong>
+<span>Notified Crops</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Insurance</span>
+<span class="tag">Crop Loss</span>
+<span class="tag">Risk Protection</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://pmfby.gov.in/"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Official Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('pmfby')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="central"
+data-category="soil"
+data-search="soil health card soil testing nutrients fertilizer">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-flask"></i>
+</div>
+
+<div>
+
+<h3>Soil Health Card</h3>
+<small>Government of India</small>
+
+</div>
+
+</div>
+
+<span class="status open">
+● AVAILABLE
+</span>
+
+</div>
+
+<p class="description">
+Provides soil nutrient information and fertilizer recommendations based on soil testing.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Soil Analysis</span>
+</div>
+
+<div class="info-item">
+<strong>Purpose</strong>
+<span>Fertilizer Advice</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Soil Testing</span>
+<span class="tag">Nutrients</span>
+<span class="tag">Fertilizer</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://soilhealth.dac.gov.in/"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Official Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('soil')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="central"
+data-category="market"
+data-search="enam national agriculture market mandi trading">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-chart-line"></i>
+</div>
+
+<div>
+
+<h3>e-NAM</h3>
+<small>National Agriculture Market</small>
+
+</div>
+
+</div>
+
+<span class="status open">
+● LIVE
+</span>
+
+</div>
+
+<p class="description">
+Digital agriculture market platform connecting agricultural markets and providing market services.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Service</strong>
+<span>Market Access</span>
+</div>
+
+<div class="info-item">
+<strong>Platform</strong>
+<span>Online Market</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Market</span>
+<span class="tag">Mandi</span>
+<span class="tag">Trading</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://www.enam.gov.in/"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Official Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('enam')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="central"
+data-category="irrigation"
+data-search="pmksy krishi sinchayee yojana irrigation water micro irrigation">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-droplet"></i>
+</div>
+
+<div>
+
+<h3>PM Krishi Sinchayee Yojana</h3>
+<small>Government of India</small>
+
+</div>
+
+</div>
+
+<span class="status open">
+● AVAILABLE
+</span>
+
+</div>
+
+<p class="description">
+Government irrigation initiative focused on improving water-use efficiency and irrigation access.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Irrigation Support</span>
+</div>
+
+<div class="info-item">
+<strong>Focus</strong>
+<span>Water Efficiency</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Irrigation</span>
+<span class="tag">Water</span>
+<span class="tag">Micro-Irrigation</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://pmksy.gov.in/"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Official Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('pmksy')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="maharashtra"
+data-category="mechanization"
+data-search="farm mechanization machinery tractor equipment maharashtra">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-tractor"></i>
+</div>
+
+<div>
+
+<h3>Farm Mechanization</h3>
+<small>Maharashtra Agriculture Department</small>
+
+</div>
+
+</div>
+
+<span class="status open">
+● AVAILABLE
+</span>
+
+</div>
+
+<p class="description">
+Support related to agricultural machinery and farm mechanization through the Maharashtra farmer portal.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Farm Machinery</span>
+</div>
+
+<div class="info-item">
+<strong>Platform</strong>
+<span>MahaDBT</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Machinery</span>
+<span class="tag">Tractor</span>
+<span class="tag">Maharashtra</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://mahadbt.maharashtra.gov.in/farmer/login"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Apply Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('mechanization')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="maharashtra"
+data-category="horticulture"
+data-search="horticulture fruits vegetables maharashtra farming">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-apple-whole"></i>
+</div>
+
+<div>
+
+<h3>Horticulture Development</h3>
+<small>Maharashtra Agriculture Department</small>
+
+</div>
+
+</div>
+
+<span class="status open">
+● AVAILABLE
+</span>
+
+</div>
+
+<p class="description">
+Horticulture development support for eligible agricultural and horticultural activities.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Horticulture Support</span>
+</div>
+
+<div class="info-item">
+<strong>Focus</strong>
+<span>Fruits & Vegetables</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Horticulture</span>
+<span class="tag">Fruits</span>
+<span class="tag">Vegetables</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://mahadbt.maharashtra.gov.in/farmer/login"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Apply Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('horticulture')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="maharashtra"
+data-category="irrigation"
+data-search="maharashtra sustainable agriculture irrigation water">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-water"></i>
+</div>
+
+<div>
+
+<h3>Sustainable Agriculture Irrigation</h3>
+<small>Maharashtra Government</small>
+
+</div>
+
+</div>
+
+<span class="status open">
+● AVAILABLE
+</span>
+
+</div>
+
+<p class="description">
+Agriculture irrigation and water management support available through the state system.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Irrigation Support</span>
+</div>
+
+<div class="info-item">
+<strong>Platform</strong>
+<span>MahaDBT</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Irrigation</span>
+<span class="tag">Water</span>
+<span class="tag">Maharashtra</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://mahadbt.maharashtra.gov.in/farmer/login"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Apply Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('irrigation')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+<div class="scheme-card"
+data-level="maharashtra"
+data-category="horticulture"
+data-search="bhausaheb fundkar phalbaag lagvad orchard fruit plantation maharashtra">
+
+<div class="card-head">
+
+<div class="scheme-title">
+
+<div class="scheme-icon">
+<i class="fa-solid fa-tree"></i>
+</div>
+
+<div>
+
+<h3>Bhausaheb Fundkar Phalbaag Lagvad</h3>
+<small>Maharashtra Government</small>
+
+</div>
+
+</div>
+
+<span class="status seasonal">
+● SEASONAL
+</span>
+
+</div>
+
+<p class="description">
+Fruit orchard development support listed through the Maharashtra farmer scheme platform.
+</p>
+
+<div class="scheme-info">
+
+<div class="info-item">
+<strong>Benefit</strong>
+<span>Fruit Orchard</span>
+</div>
+
+<div class="info-item">
+<strong>Focus</strong>
+<span>Horticulture</span>
+</div>
+
+</div>
+
+<div class="tags">
+
+<span class="tag">Fruit Orchard</span>
+<span class="tag">Plantation</span>
+<span class="tag">Maharashtra</span>
+
+</div>
+
+<div class="card-footer">
+
+<a
+href="https://mahadbt.maharashtra.gov.in/farmer/login"
+target="_blank"
+rel="noopener"
+class="apply-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+Apply Portal
+
+</a>
+
+<button
+class="details-btn"
+onclick="showDetails('orchard')">
+
+<i class="fa-solid fa-circle-info"></i>
+Details
+
+</button>
+
+</div>
+
+<div class="official">
+<i class="fa-solid fa-shield-check"></i>
+Official Government Platform
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="no-result" id="noResult">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<h3>No Scheme Found</h3>
+
+<p>Try another scheme name or category.</p>
+
+</div>
+
+
+<div class="notice">
+
+<i class="fa-solid fa-circle-exclamation"></i>
+
+<strong>Important:</strong>
+Scheme eligibility, application dates, benefits and availability
+may change. Always verify the latest information on the official
+government portal before applying.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="modal" id="detailsModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeDetails()">
+&times;
+</button>
+
+<div id="modalContent"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const searchInput =
+document.getElementById("schemeSearch");
+
+const levelFilter =
+document.getElementById("levelFilter");
+
+const categoryFilter =
+document.getElementById("categoryFilter");
+
+const cards =
+document.querySelectorAll(".scheme-card");
+
+const resultCount =
+document.getElementById("resultCount");
+
+const noResult =
+document.getElementById("noResult");
+
+
+function filterSchemes(){
+
+const search =
+searchInput.value.toLowerCase().trim();
+
+const level =
+levelFilter.value;
+
+const category =
+categoryFilter.value;
+
+let count=0;
+
+cards.forEach(card=>{
+
+const text =
+card.dataset.search.toLowerCase();
+
+const cardLevel =
+card.dataset.level;
+
+const cardCategory =
+card.dataset.category;
+
+const matchSearch =
+text.includes(search);
+
+const matchLevel =
+level==="all" || cardLevel===level;
+
+const matchCategory =
+category==="all" || cardCategory===category;
+
+if(matchSearch && matchLevel && matchCategory){
+
+card.style.display="block";
+count++;
+
+}else{
+
+card.style.display="none";
+
+}
+
+});
+
+resultCount.innerText =
+count+" scheme"+(count!==1?"s":"");
+
+noResult.style.display =
+count===0 ? "block" : "none";
+
+}
+
+
+searchInput.addEventListener(
+"input",
+filterSchemes
+);
+
+levelFilter.addEventListener(
+"change",
+filterSchemes
+);
+
+categoryFilter.addEventListener(
+"change",
+filterSchemes
+);
+
+
+function resetFilters(){
+
+searchInput.value="";
+levelFilter.value="all";
+categoryFilter.value="all";
+
+filterSchemes();
+
+}
+
+
+const details={
+
+pmkisan:{
+title:"PM-KISAN Samman Nidhi",
+level:"Central Government",
+benefit:"Income support for eligible farmer families through Direct Benefit Transfer.",
+eligibility:"Eligibility is subject to the current official PM-KISAN guidelines and applicable exclusions.",
+documents:"Aadhaar details, bank account information and other documents as required by the official system.",
+steps:[
+"Visit the official PM-KISAN portal.",
+"Complete the required registration or beneficiary process.",
+"Complete eKYC where applicable.",
+"Check beneficiary and payment status."
+]
+},
+
+namo:{
+title:"Namo Shetkari Mahasanman Nidhi",
+level:"Maharashtra Government",
+benefit:"Farmer support initiative implemented through the Maharashtra DBT ecosystem.",
+eligibility:"Eligibility is based on the applicable Maharashtra Government rules.",
+documents:"Aadhaar, bank details and farmer-related records as required.",
+steps:[
+"Open the official MahaDBT portal.",
+"Login or register as applicable.",
+"Check the applicable farmer scheme.",
+"Complete the required application process."
+]
+},
+
+pmfby:{
+title:"Pradhan Mantri Fasal Bima Yojana",
+level:"Central Government",
+benefit:"Insurance protection for notified crops against covered agricultural risks.",
+eligibility:"Crop, season, area and enrollment conditions are subject to applicable notifications.",
+documents:"Farmer identity details, land/crop information and bank details may be required.",
+steps:[
+"Check the applicable crop and season.",
+"Visit the official PMFBY platform.",
+"Check enrollment requirements.",
+"Complete the applicable insurance process."
+]
+},
+
+soil:{
+title:"Soil Health Card",
+level:"Central Government",
+benefit:"Soil testing information and fertilizer recommendations.",
+eligibility:"Farmers can access soil testing services according to the applicable local system.",
+documents:"Farmer details and soil sample information may be required.",
+steps:[
+"Locate the applicable soil testing facility.",
+"Submit the required soil sample.",
+"Complete the testing process.",
+"View the soil health information and recommendations."
+]
+},
+
+enam:{
+title:"e-NAM",
+level:"Central Government",
+benefit:"Digital agriculture market access and market-related services.",
+eligibility:"Services depend on the applicable market, commodity and user category.",
+documents:"Registration and identity or trading documents may be required.",
+steps:[
+"Visit the official e-NAM portal.",
+"Check registration requirements.",
+"Complete the applicable registration.",
+"Use available market services."
+]
+},
+
+pmksy:{
+title:"PM Krishi Sinchayee Yojana",
+level:"Central Government",
+benefit:"Improving irrigation access and water-use efficiency.",
+eligibility:"Conditions depend on the applicable PMKSY component.",
+documents:"Land, farmer and irrigation-related documents may be required.",
+steps:[
+"Check the applicable PMKSY component.",
+"Contact the concerned agriculture authority.",
+"Submit required documents.",
+"Follow the applicable approval process."
+]
+},
+
+mechanization:{
+title:"Farm Mechanization",
+level:"Maharashtra Government",
+benefit:"Support related to eligible agricultural machinery and mechanization.",
+eligibility:"Current eligibility and components should be checked on MahaDBT.",
+documents:"Farmer identity, land and machinery-related documents may be required.",
+steps:[
+"Login to MahaDBT Farmer Portal.",
+"Check available mechanization components.",
+"Select the applicable component.",
+"Submit the required application and documents."
+]
+},
+
+horticulture:{
+title:"Horticulture Development",
+level:"Maharashtra Government",
+benefit:"Support for eligible horticulture activities including fruits and vegetables.",
+eligibility:"Current eligibility and component details should be verified on MahaDBT.",
+documents:"Farmer and land-related documents may be required.",
+steps:[
+"Login to MahaDBT.",
+"Check available horticulture schemes.",
+"Select the applicable component.",
+"Submit the application and documents."
+]
+},
+
+irrigation:{
+title:"Sustainable Agriculture Irrigation",
+level:"Maharashtra Government",
+benefit:"Support related to irrigation and water management for agriculture.",
+eligibility:"Applicable conditions depend on the current state scheme component.",
+documents:"Farmer, land and irrigation-related documents may be required.",
+steps:[
+"Open the MahaDBT Farmer Portal.",
+"Check the applicable irrigation component.",
+"Complete the required application.",
+"Track the application status."
+]
+},
+
+orchard:{
+title:"Bhausaheb Fundkar Phalbaag Lagvad",
+level:"Maharashtra Government",
+benefit:"Support related to fruit orchard development.",
+eligibility:"Eligibility and current application conditions should be verified on MahaDBT.",
+documents:"Farmer, land and plantation-related documents may be required.",
+steps:[
+"Open the MahaDBT Farmer Portal.",
+"Check the current orchard scheme availability.",
+"Submit the required application.",
+"Follow verification and approval updates."
+]
+}
+
+};
+
+
+function showDetails(id){
+
+const d=details[id];
+
+let steps="";
+
+d.steps.forEach(
+(step,index)=>{
+steps+=`
+<div class="step">
+<b>${index+1}.</b>
+${step}
+</div>
+`;
+}
+);
+
+document.getElementById(
+"modalContent"
+).innerHTML=`
+
+<h2>
+<i class="fa-solid fa-circle-info"></i>
+${d.title}
+</h2>
+
+<div class="modal-row">
+
+<strong>Government Level</strong>
+
+<span>${d.level}</span>
+
+</div>
+
+<div class="modal-row">
+
+<strong>Benefit</strong>
+
+<span>${d.benefit}</span>
+
+</div>
+
+<div class="modal-row">
+
+<strong>Eligibility</strong>
+
+<span>${d.eligibility}</span>
+
+</div>
+
+<div class="modal-row">
+
+<strong>Required Documents</strong>
+
+<span>${d.documents}</span>
+
+</div>
+
+<div class="modal-row">
+
+<strong>Application Process</strong>
+
+<div class="steps">
+${steps}
+</div>
+
+</div>
+
+`;
+
+document.getElementById(
+"detailsModal"
+).style.display="flex";
+
+}
+
+
+function closeDetails(){
+
+document.getElementById(
+"detailsModal"
+).style.display="none";
+
+}
+
+
+window.addEventListener(
+"click",
+function(e){
+
+const modal=
+document.getElementById("detailsModal");
+
+if(e.target===modal){
+closeDetails();
+}
+
+});
+
+
+const menuBtn=
+document.getElementById("menuBtn");
+
+const sidebar=
+document.querySelector(".sidebar");
+
+if(menuBtn){
+
+menuBtn.addEventListener(
+"click",
+function(){
+
+sidebar.classList.toggle("active");
+
+});
+
+}
+
+
+const darkBtn=
+document.getElementById("darkBtn");
+
+if(darkBtn){
+
+darkBtn.addEventListener(
+"click",
+function(){
+
+document.body.classList.toggle("dark");
+
+});
+
+}
+
+
+const logoutBtn=
+document.getElementById("logoutBtn");
+
+if(logoutBtn){
+
+logoutBtn.addEventListener(
+"click",
+function(e){
+
+e.preventDefault();
+
+localStorage.clear();
+
+window.location.href="index.html";
+
+});
+
+}
+
+
+filterSchemes();
+
+</script>
+
+</body>
+</html>

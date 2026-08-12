@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profile | Smart Agriculture Platform</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f5f8f6;
+    font-family:Arial,sans-serif;
+    color:#26382d;
+}
+
+.main{
+    padding:35px;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    margin:0;
+    font-size:27px;
+    color:#183b27;
+}
+
+.page-title p{
+    margin:6px 0 0;
+    color:#849088;
+    font-size:11px;
+}
+
+.profile-box{
+    max-width:720px;
+    margin:0 auto;
+    background:white;
+    border:1px solid #e2ebe5;
+    border-radius:16px;
+    box-shadow:0 8px 25px rgba(30,70,45,.06);
+    overflow:hidden;
+}
+
+.profile-top{
+    padding:30px;
+    display:flex;
+    align-items:center;
+    gap:25px;
+    border-bottom:1px solid #edf1ee;
+}
+
+.photo-area{
+    position:relative;
+    flex-shrink:0;
+}
+
+.profile-photo{
+    width:105px;
+    height:105px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#edf5ef;
+    border:4px solid #e5f1e8;
+}
+
+.camera{
+    position:absolute;
+    right:0;
+    bottom:3px;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    border:3px solid white;
+    background:#287b49;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    font-size:10px;
+}
+
+#photo{
+    display:none;
+}
+
+.profile-name h2{
+    margin:0;
+    font-size:21px;
+    color:#183b27;
+}
+
+.profile-name p{
+    margin:6px 0 10px;
+    color:#849088;
+    font-size:10px;
+}
+
+.active{
+    display:inline-block;
+    padding:5px 10px;
+    background:#eaf6ed;
+    color:#287b49;
+    border-radius:20px;
+    font-size:8px;
+    font-weight:bold;
+}
+
+.form{
+    padding:28px 30px;
+}
+
+.form-title{
+    margin-bottom:20px;
+}
+
+.form-title h3{
+    margin:0;
+    color:#183b27;
+    font-size:16px;
+}
+
+.form-title p{
+    margin:5px 0 0;
+    color:#8a968e;
+    font-size:9px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:6px;
+    color:#526158;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.input{
+    position:relative;
+}
+
+.input i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#398355;
+    font-size:10px;
+}
+
+.input input,
+.input textarea{
+    width:100%;
+    border:1px solid #dce6df;
+    border-radius:8px;
+    background:#fbfdfb;
+    outline:none;
+    font-size:10px;
+    color:#26382d;
+    padding-left:32px;
+}
+
+.input input{
+    height:41px;
+}
+
+.input textarea{
+    height:65px;
+    padding-top:12px;
+    resize:none;
+}
+
+.input input:focus,
+.input textarea:focus{
+    border-color:#398355;
+    background:white;
+    box-shadow:0 0 0 3px rgba(57,131,85,.07);
+}
+
+.full{
+    grid-column:1 / -1;
+}
+
+.actions{
+    margin-top:23px;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+button{
+    border:0;
+    border-radius:8px;
+    height:39px;
+    padding:0 18px;
+    font-size:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.save{
+    background:#287b49;
+    color:white;
+}
+
+.save:hover{
+    background:#1d6339;
+}
+
+.reset{
+    background:#edf3ef;
+    color:#526158;
+}
+
+.reset:hover{
+    background:#e2eae4;
+}
+
+.bottom{
+    padding:18px 30px;
+    background:#fafcfb;
+    border-top:1px solid #edf1ee;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.member{
+    color:#89958e;
+    font-size:8px;
+}
+
+.logout{
+    background:none;
+    color:#65736a;
+    padding:0 5px;
+    height:auto;
+}
+
+.logout:hover{
+    color:#287b49;
+}
+
+.notification{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#183b27;
+    color:white;
+    padding:11px 15px;
+    border-radius:8px;
+    font-size:9px;
+    display:none;
+}
+
+@media(max-width:650px){
+
+    .main{
+        padding:20px;
+    }
+
+    .profile-top{
+        padding:25px;
+    }
+
+    .form{
+        padding:25px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .profile-top{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .actions{
+        justify-content:stretch;
+    }
+
+    .actions button{
+        flex:1;
+    }
+
+    .bottom{
+        padding:16px 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+
+<h2>
+<i class="fa-solid fa-seedling"></i>
+Smart Agri
+</h2>
+
+<ul>
+
+<li>
+<a href="dashboard.html">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</a>
+</li>
+
+<li>
+<a href="weather.html">
+<i class="fa-solid fa-cloud-sun"></i>
+Weather
+</a>
+</li>
+
+<li>
+<a href="crop.html">
+<i class="fa-solid fa-leaf"></i>
+Crop Management
+</a>
+</li>
+
+<li>
+<a href="disease.html">
+<i class="fa-solid fa-bug"></i>
+Disease Detection
+</a>
+</li>
+
+<li>
+<a href="solution.html">
+<i class="fa-solid fa-kit-medical"></i>
+Solutions
+</a>
+</li>
+
+<li>
+<a href="market.html">
+<i class="fa-solid fa-chart-line"></i>
+Market
+</a>
+</li>
+
+<li>
+<a href="scheme.html">
+<i class="fa-solid fa-building-columns"></i>
+Government Schemes
+</a>
+</li>
+
+<li>
+<a href="profile.html">
+<i class="fa-solid fa-user"></i>
+Profile
+</a>
+</li>
+
+<li>
+<a href="#" onclick="logoutUser()">
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+</a>
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="main">
+
+
+<div class="page-title">
+
+<h1>Farmer Profile</h1>
+
+<p>
+Manage your personal information
+</p>
+
+</div>
+
+
+<div class="profile-box">
+
+
+<div class="profile-top">
+
+
+<div class="photo-area">
+
+<img
+id="preview"
+class="profile-photo"
+alt="Profile Photo">
+
+<label
+for="photo"
+class="camera">
+
+<i class="fa-solid fa-camera"></i>
+
+</label>
+
+<input
+type="file"
+id="photo"
+accept="image/*">
+
+</div>
+
+
+<div class="profile-name">
+
+<h2 id="profileName">
+Farmer
+</h2>
+
+<p>
+Farmer Account
+</p>
+
+<span class="active">
+● Active Account
+</span>
+
+</div>
+
+
+</div>
+
+
+<div class="form">
+
+
+<div class="form-title">
+
+<h3>Personal Information</h3>
+
+<p>Update your basic account details.</p>
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="field">
+
+<label>Full Name</label>
+
+<div class="input">
+
+<i class="fa-solid fa-user"></i>
+
+<input
+type="text"
+id="pname"
+placeholder="Full name">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>Mobile Number</label>
+
+<div class="input">
+
+<i class="fa-solid fa-phone"></i>
+
+<input
+type="tel"
+id="pmobile"
+placeholder="Mobile number">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>Email Address</label>
+
+<div class="input">
+
+<i class="fa-solid fa-envelope"></i>
+
+<input
+type="email"
+id="pemail"
+placeholder="Email address">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>Farmer ID</label>
+
+<div class="input">
+
+<i class="fa-solid fa-id-card"></i>
+
+<input
+type="text"
+id="farmerId"
+readonly>
+
+</div>
+
+</div>
+
+
+<div class="field full">
+
+<label>Address</label>
+
+<div class="input">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<textarea
+id="paddress"
+placeholder="Enter your address"></textarea>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="reset"
+onclick="loadProfile()">
+
+<i class="fa-solid fa-rotate-left"></i>
+ Reset
+
+</button>
+
+<button
+class="save"
+onclick="updateProfile()">
+
+<i class="fa-solid fa-check"></i>
+ Save Changes
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<div class="bottom">
+
+<span class="member">
+Smart Agriculture Platform
+</span>
+
+<button
+class="logout"
+onclick="logoutUser()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+ Logout
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div
+class="notification"
+id="notification">
+Profile updated successfully.
+</div>
+
+
+<script>
+
+const defaultImage =
+"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Crect width='130' height='130' fill='%23eaf3ed'/%3E%3Ccircle cx='65' cy='48' r='23' fill='%2390a999'/%3E%3Cpath d='M25 120c5-29 22-43 40-43s35 14 40 43' fill='%2390a999'/%3E%3C/svg%3E";
+
+
+function loadProfile(){
+
+const profile =
+JSON.parse(
+localStorage.getItem("farmerProfile")
+) || {};
+
+const user =
+JSON.parse(
+localStorage.getItem("farmerUser")
+) || {};
+
+const name =
+profile.name ||
+user.name ||
+localStorage.getItem("farmerName") ||
+"Farmer";
+
+const mobile =
+profile.mobile ||
+user.mobile ||
+"";
+
+const email =
+profile.email ||
+user.email ||
+"";
+
+const address =
+profile.address ||
+user.address ||
+"";
+
+
+document.getElementById("pname")
+.value=name;
+
+document.getElementById("pmobile")
+.value=mobile;
+
+document.getElementById("pemail")
+.value=email;
+
+document.getElementById("paddress")
+.value=address;
+
+
+document.getElementById("profileName")
+.innerText=name;
+
+
+let id =
+profile.farmerId;
+
+if(!id){
+
+id =
+"FA-" +
+Math.floor(
+100000 +
+Math.random()*900000
+);
+
+}
+
+document.getElementById("farmerId")
+.value=id;
+
+
+document.getElementById("preview")
+.src =
+profile.photo ||
+defaultImage;
+
+}
+
+
+document.getElementById("photo")
+.addEventListener(
+"change",
+function(e){
+
+const file =
+e.target.files[0];
+
+if(!file){
+return;
+}
+
+if(file.size > 2*1024*1024){
+
+showNotification(
+"Image must be below 2 MB"
+);
+
+return;
+}
+
+const reader =
+new FileReader();
+
+reader.onload=function(){
+
+document.getElementById("preview")
+.src=reader.result;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+
+function updateProfile(){
+
+const name =
+document.getElementById("pname")
+.value.trim();
+
+const mobile =
+document.getElementById("pmobile")
+.value.trim();
+
+const email =
+document.getElementById("pemail")
+.value.trim();
+
+const address =
+document.getElementById("paddress")
+.value.trim();
+
+const farmerId =
+document.getElementById("farmerId")
+.value;
+
+const photo =
+document.getElementById("preview")
+.src;
+
+
+if(!name){
+
+showNotification(
+"Please enter your name"
+);
+
+return;
+
+}
+
+
+if(
+email &&
+!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+){
+
+showNotification(
+"Enter a valid email address"
+);
+
+return;
+
+}
+
+
+const profile={
+
+name:name,
+mobile:mobile,
+email:email,
+address:address,
+farmerId:farmerId,
+photo:photo
+
+};
+
+
+localStorage.setItem(
+"farmerProfile",
+JSON.stringify(profile)
+);
+
+localStorage.setItem(
+"farmerName",
+name
+);
+
+
+document.getElementById("profileName")
+.innerText=name;
+
+
+showNotification(
+"Profile saved successfully"
+);
+
+}
+
+
+function logoutUser(){
+
+localStorage.removeItem(
+"isLoggedIn"
+);
+
+window.location.href=
+"login.html";
+
+}
+
+
+function showNotification(text){
+
+const box =
+document.getElementById("notification");
+
+box.innerText=text;
+
+box.style.display="block";
+
+setTimeout(
+function(){
+
+box.style.display="none";
+
+},
+2200
+);
+
+}
+
+
+loadProfile();
+
+</script>
+
+
+</body>
+
+</html>

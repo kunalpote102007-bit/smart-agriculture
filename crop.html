@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crop Management | Smart Agriculture Platform</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f5f8f6;
+    font-family:Arial,sans-serif;
+    color:#26382d;
+}
+
+.main{
+    padding:30px;
+}
+
+.page-header{
+    margin-bottom:25px;
+}
+
+.page-header h1{
+    margin:0;
+    color:#183b27;
+    font-size:27px;
+}
+
+.page-header p{
+    margin:6px 0 0;
+    color:#859189;
+    font-size:11px;
+}
+
+.crop-container{
+    max-width:950px;
+    margin:auto;
+}
+
+.add-card{
+    background:white;
+    border:1px solid #e2ebe5;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 6px 20px rgba(30,70,45,.05);
+    margin-bottom:20px;
+}
+
+.card-title{
+    margin-bottom:20px;
+}
+
+.card-title h2{
+    margin:0;
+    color:#183b27;
+    font-size:17px;
+}
+
+.card-title p{
+    margin:5px 0 0;
+    color:#8a968e;
+    font-size:9px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:6px;
+    color:#526158;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:42px;
+    border:1px solid #dce6df;
+    border-radius:8px;
+    background:#fbfdfb;
+    padding:0 12px;
+    outline:none;
+    color:#293a30;
+    font-size:10px;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:#398355;
+    background:white;
+    box-shadow:0 0 0 3px rgba(57,131,85,.07);
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.form-button{
+    margin-top:18px;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.btn{
+    height:40px;
+    padding:0 18px;
+    border:0;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.save{
+    background:#287b49;
+    color:white;
+}
+
+.save:hover{
+    background:#1d6339;
+}
+
+.clear{
+    background:#edf3ef;
+    color:#526158;
+}
+
+.records-card{
+    background:white;
+    border:1px solid #e2ebe5;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 6px 20px rgba(30,70,45,.05);
+}
+
+.records-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.records-header h2{
+    margin:0;
+    color:#183b27;
+    font-size:17px;
+}
+
+.search{
+    width:190px;
+    height:35px;
+    border:1px solid #dce6df;
+    border-radius:7px;
+    padding:0 12px;
+    outline:none;
+    font-size:9px;
+}
+
+.search:focus{
+    border-color:#398355;
+}
+
+.table-wrapper{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th{
+    background:#f1f7f3;
+    color:#536158;
+    text-align:left;
+    padding:12px;
+    font-size:9px;
+}
+
+td{
+    padding:13px 12px;
+    border-top:1px solid #edf1ee;
+    color:#5c6961;
+    font-size:9px;
+}
+
+.crop-name{
+    color:#294134;
+    font-weight:bold;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:8px;
+    font-weight:bold;
+}
+
+.growing{
+    background:#eaf6ed;
+    color:#287b49;
+}
+
+.planned{
+    background:#eef2f5;
+    color:#657582;
+}
+
+.harvested{
+    background:#fff5df;
+    color:#98701e;
+}
+
+.actions{
+    display:flex;
+    gap:5px;
+}
+
+.action{
+    width:28px;
+    height:28px;
+    border:0;
+    border-radius:6px;
+    cursor:pointer;
+    background:#edf3ef;
+    color:#557060;
+}
+
+.action:hover{
+    background:#e1eae4;
+}
+
+.delete{
+    color:#b74a40;
+    background:#fff1ef;
+}
+
+.empty{
+    text-align:center;
+    padding:35px;
+    color:#9aa59e;
+    display:none;
+}
+
+.empty i{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.empty p{
+    margin:0;
+    font-size:10px;
+}
+
+.notification{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#183b27;
+    color:white;
+    padding:11px 16px;
+    border-radius:8px;
+    font-size:9px;
+    display:none;
+}
+
+@media(max-width:650px){
+
+    .main{
+        padding:20px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .records-header{
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+    }
+
+    .search{
+        width:100%;
+    }
+
+    .form-button{
+        justify-content:stretch;
+    }
+
+    .btn{
+        flex:1;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+
+<h2>
+<i class="fa-solid fa-seedling"></i>
+Smart Agri
+</h2>
+
+<ul>
+
+<li>
+<a href="dashboard.html">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</a>
+</li>
+
+<li>
+<a href="weather.html">
+<i class="fa-solid fa-cloud-sun"></i>
+Weather
+</a>
+</li>
+
+<li>
+<a href="crop.html">
+<i class="fa-solid fa-leaf"></i>
+Crop Management
+</a>
+</li>
+
+<li>
+<a href="disease.html">
+<i class="fa-solid fa-bug"></i>
+Disease Detection
+</a>
+</li>
+
+<li>
+<a href="solution.html">
+<i class="fa-solid fa-kit-medical"></i>
+Solutions
+</a>
+</li>
+
+<li>
+<a href="market.html">
+<i class="fa-solid fa-chart-line"></i>
+Market
+</a>
+</li>
+
+<li>
+<a href="scheme.html">
+<i class="fa-solid fa-building-columns"></i>
+Government Schemes
+</a>
+</li>
+
+<li>
+<a href="profile.html">
+<i class="fa-solid fa-user"></i>
+Profile
+</a>
+</li>
+
+<li>
+<a href="#" onclick="logoutUser()">
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+</a>
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="main">
+
+
+<div class="crop-container">
+
+
+<div class="page-header">
+
+<h1>
+<i class="fa-solid fa-leaf"></i>
+Crop Management
+</h1>
+
+<p>
+Add and manage your farm crop records.
+</p>
+
+</div>
+
+
+<div class="add-card">
+
+
+<div class="card-title">
+
+<h2>
+<i class="fa-solid fa-plus"></i>
+ Add Crop
+</h2>
+
+<p>
+Enter basic information about your crop.
+</p>
+
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>Crop Name</label>
+
+<input
+type="text"
+id="cropName"
+placeholder="Example: Wheat">
+
+</div>
+
+
+<div class="field">
+
+<label>Crop Type</label>
+
+<select id="cropType">
+
+<option value="">Select Crop Type</option>
+
+<option>Cereal</option>
+<option>Pulse</option>
+<option>Oilseed</option>
+<option>Vegetable</option>
+<option>Fruit</option>
+<option>Cash Crop</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Sowing Date</label>
+
+<input
+type="date"
+id="cropDate">
+
+</div>
+
+
+<div class="field">
+
+<label>Land Area</label>
+
+<input
+type="number"
+id="cropArea"
+placeholder="Example: 2.5"
+step="0.1"
+min="0">
+
+</div>
+
+
+<div class="field">
+
+<label>Crop Status</label>
+
+<select id="cropStatus">
+
+<option value="Growing">
+Growing
+</option>
+
+<option value="Planned">
+Planned
+</option>
+
+<option value="Harvested">
+Harvested
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="form-button">
+
+<button
+class="btn clear"
+onclick="clearForm()">
+
+Clear
+
+</button>
+
+<button
+class="btn save"
+onclick="saveCrop()">
+
+<i class="fa-solid fa-floppy-disk"></i>
+ Save Crop
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<div class="records-card">
+
+
+<div class="records-header">
+
+<h2>
+<i class="fa-solid fa-list"></i>
+ My Crops
+</h2>
+
+<input
+class="search"
+id="searchInput"
+type="text"
+placeholder="Search crop..."
+oninput="displayCrops()">
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Crop</th>
+<th>Type</th>
+<th>Sowing Date</th>
+<th>Land Area</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="cropTable">
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="empty" id="emptyState">
+
+<i class="fa-solid fa-seedling"></i>
+
+<p>No crop records found.</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div
+class="notification"
+id="notification">
+Crop saved successfully.
+</div>
+
+
+<script>
+
+let crops =
+JSON.parse(
+localStorage.getItem("smartAgriCrops")
+) || [];
+
+let editIndex=-1;
+
+
+function saveCrop(){
+
+const name =
+document.getElementById("cropName")
+.value.trim();
+
+const type =
+document.getElementById("cropType")
+.value;
+
+const date =
+document.getElementById("cropDate")
+.value;
+
+const area =
+document.getElementById("cropArea")
+.value;
+
+const status =
+document.getElementById("cropStatus")
+.value;
+
+
+if(!name){
+
+showNotification(
+"Please enter crop name."
+);
+
+return;
+
+}
+
+
+if(!type){
+
+showNotification(
+"Please select crop type."
+);
+
+return;
+
+}
+
+
+if(!date){
+
+showNotification(
+"Please select sowing date."
+);
+
+return;
+
+}
+
+
+if(!area || Number(area)<=0){
+
+showNotification(
+"Please enter land area."
+);
+
+return;
+
+}
+
+
+const crop={
+
+name:name,
+type:type,
+date:date,
+area:area,
+status:status
+
+};
+
+
+if(editIndex===-1){
+
+crops.push(crop);
+
+showNotification(
+"Crop added successfully."
+);
+
+}else{
+
+crops[editIndex]=crop;
+
+editIndex=-1;
+
+showNotification(
+"Crop updated successfully."
+);
+
+}
+
+
+localStorage.setItem(
+"smartAgriCrops",
+JSON.stringify(crops)
+);
+
+
+clearForm();
+
+displayCrops();
+
+}
+
+
+function displayCrops(){
+
+const table =
+document.getElementById("cropTable");
+
+const search =
+document.getElementById("searchInput")
+.value.toLowerCase();
+
+table.innerHTML="";
+
+
+const filtered =
+crops.filter(function(crop){
+
+return crop.name
+.toLowerCase()
+.includes(search);
+
+});
+
+
+filtered.forEach(function(crop){
+
+const index =
+crops.indexOf(crop);
+
+const row =
+document.createElement("tr");
+
+
+let statusClass="growing";
+
+if(crop.status==="Planned"){
+statusClass="planned";
+}
+
+if(crop.status==="Harvested"){
+statusClass="harvested";
+}
+
+
+row.innerHTML=`
+
+<td>
+
+<span class="crop-name">
+${escapeHTML(crop.name)}
+</span>
+
+</td>
+
+<td>
+${escapeHTML(crop.type)}
+</td>
+
+<td>
+${formatDate(crop.date)}
+</td>
+
+<td>
+${escapeHTML(crop.area)} Acre
+</td>
+
+<td>
+
+<span class="status ${statusClass}">
+${escapeHTML(crop.status)}
+</span>
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="action"
+onclick="editCrop(${index})"
+title="Edit">
+
+<i class="fa-solid fa-pen"></i>
+
+</button>
+
+<button
+class="action delete"
+onclick="deleteCrop(${index})"
+title="Delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</div>
+
+</td>
+
+`;
+
+table.appendChild(row);
+
+});
+
+
+document.getElementById("emptyState")
+.style.display =
+filtered.length===0
+? "block"
+: "none";
+
+}
+
+
+function editCrop(index){
+
+const crop =
+crops[index];
+
+document.getElementById("cropName")
+.value=crop.name;
+
+document.getElementById("cropType")
+.value=crop.type;
+
+document.getElementById("cropDate")
+.value=crop.date;
+
+document.getElementById("cropArea")
+.value=crop.area;
+
+document.getElementById("cropStatus")
+.value=crop.status;
+
+editIndex=index;
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+function deleteCrop(index){
+
+if(!confirm(
+"Delete this crop record?"
+)){
+
+return;
+
+}
+
+
+crops.splice(index,1);
+
+localStorage.setItem(
+"smartAgriCrops",
+JSON.stringify(crops)
+);
+
+displayCrops();
+
+showNotification(
+"Crop deleted successfully."
+);
+
+}
+
+
+function clearForm(){
+
+document.getElementById("cropName")
+.value="";
+
+document.getElementById("cropType")
+.value="";
+
+document.getElementById("cropDate")
+.value="";
+
+document.getElementById("cropArea")
+.value="";
+
+document.getElementById("cropStatus")
+.value="Growing";
+
+editIndex=-1;
+
+}
+
+
+function formatDate(date){
+
+if(!date){
+return "-";
+}
+
+const d =
+new Date(date+"T00:00:00");
+
+return d.toLocaleDateString(
+"en-IN",
+{
+day:"2-digit",
+month:"short",
+year:"numeric"
+}
+);
+
+}
+
+
+function escapeHTML(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function showNotification(text){
+
+const box =
+document.getElementById("notification");
+
+box.innerText=text;
+
+box.style.display="block";
+
+setTimeout(function(){
+
+box.style.display="none";
+
+},2200);
+
+}
+
+
+function logoutUser(){
+
+localStorage.removeItem(
+"isLoggedIn"
+);
+
+window.location.href=
+"login.html";
+
+}
+
+
+displayCrops();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Agri - Disease Detection</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f4;
+}
+
+.main {
+    padding: 30px;
+}
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin: 0 0 8px;
+    color: #1b5e20;
+}
+
+.page-header p {
+    margin: 0;
+    color: #666;
+}
+
+.stats {
+    max-width: 1100px;
+    margin: 0 auto 25px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    text-align: center;
+}
+
+.stat-card .icon {
+    font-size: 30px;
+}
+
+.stat-card h3 {
+    margin: 8px 0 4px;
+    color: #2e7d32;
+    font-size: 28px;
+}
+
+.stat-card p {
+    margin: 0;
+    color: #777;
+}
+
+.detect-container {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.10);
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #2e7d32;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+select,
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    font-size: 15px;
+}
+
+select:focus,
+input:focus {
+    outline: none;
+    border-color: #2e7d32;
+}
+
+.preview {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    border: 2px dashed #bbb;
+    border-radius: 12px;
+    margin-top: 15px;
+    display: none;
+    background: #fafafa;
+}
+
+.detect-btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 9px;
+    background: #2e7d32;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.detect-btn:hover {
+    background: #1b5e20;
+}
+
+.result {
+    display: none;
+}
+
+.disease-title {
+    background: #e8f5e9;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.disease-title h2 {
+    margin: 0 0 8px;
+    color: #2e7d32;
+}
+
+.disease-title p {
+    margin: 0;
+    color: #555;
+}
+
+.info-box {
+    margin-top: 12px;
+    padding: 15px;
+    border-radius: 9px;
+    background: #f7f9f7;
+}
+
+.info-box strong {
+    color: #2e7d32;
+}
+
+.info-box p {
+    line-height: 1.6;
+    color: #444;
+}
+
+.confidence {
+    height: 10px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.confidence-bar {
+    height: 100%;
+    width: 0%;
+    background: #2e7d32;
+    transition: width 1s;
+}
+
+.search-card {
+    max-width: 1100px;
+    margin: 25px auto;
+}
+
+.search-controls {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 12px;
+}
+
+.search-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.disease-item {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    cursor: pointer;
+    border: 1px solid #eee;
+    transition: .2s;
+}
+
+.disease-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,.12);
+}
+
+.disease-item h3 {
+    margin-top: 0;
+    color: #2e7d32;
+}
+
+.disease-item p {
+    color: #555;
+    line-height: 1.5;
+}
+
+.tag {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 15px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 12px;
+    margin: 3px;
+}
+
+.no-result {
+    text-align: center;
+    color: #777;
+    padding: 25px;
+    grid-column: 1 / -1;
+}
+
+@media(max-width: 900px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detect-container {
+        grid-template-columns: 1fr;
+    }
+
+    .search-results {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    .main {
+        padding: 15px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .search-results {
+        grid-template-columns: 1fr;
+    }
+
+    .search-controls {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>🌱 Smart Agri</h2>
+
+    <ul>
+
+        <li>
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+
+        <li>
+            <a href="weather.html">Weather</a>
+        </li>
+
+        <li>
+            <a href="crop.html">Crop Upload</a>
+        </li>
+
+        <li>
+            <a href="disease.html">Disease</a>
+        </li>
+
+        <li>
+            <a href="solution.html">Solution</a>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="main">
+
+    <div class="page-header">
+
+        <h1>🦠 Disease Detection</h1>
+
+        <p>
+            Smart Agriculture Disease & Solution Center
+        </p>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="icon">🦠</div>
+
+            <h3 id="totalDiseases">0</h3>
+
+            <p>Disease Records</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="icon">🌱</div>
+
+            <h3 id="totalCrops">0</h3>
+
+            <p>Crops</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="icon">💊</div>
+
+            <h3 id="totalSolutions">0</h3>
+
+            <p>Solutions</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="icon">📚</div>
+
+            <h3>24/7</h3>
+
+            <p>Knowledge Center</p>
+
+        </div>
+
+    </div>
+
+    <div class="detect-container">
+
+        <div class="card">
+
+            <h2>🔍 Detect Disease</h2>
+
+            <label>Select Crop</label>
+
+            <select id="cropSelect">
+
+                <option value="">
+                    Select Crop
+                </option>
+
+            </select>
+
+            <label>Upload Leaf Image</label>
+
+            <input
+                type="file"
+                id="leafImage"
+                accept="image/*"
+            >
+
+            <img
+                id="preview"
+                class="preview"
+                alt="Leaf Preview"
+            >
+
+            <button
+                class="detect-btn"
+                onclick="detectDisease()"
+            >
+                🔍 Detect Disease
+            </button>
+
+        </div>
+
+        <div
+            class="card result"
+            id="result"
+        >
+
+            <div class="disease-title">
+
+                <h2 id="resultDisease">
+                    Disease Name
+                </h2>
+
+                <p id="resultCrop">
+                    Crop
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <strong>
+                    📊 Confidence:
+                </strong>
+
+                <span id="resultConfidence">
+                    0%
+                </span>
+
+                <div class="confidence">
+
+                    <div
+                        class="confidence-bar"
+                        id="confidenceBar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <strong>
+                    🤒 Symptoms
+                </strong>
+
+                <p id="resultSymptoms">
+                    -
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <strong>
+                    💊 Treatment
+                </strong>
+
+                <p id="resultTreatment">
+                    -
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <strong>
+                    🛡️ Prevention
+                </strong>
+
+                <p id="resultPrevention">
+                    -
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <strong>
+                    ⚠️ Severity
+                </strong>
+
+                <p id="resultSeverity">
+                    -
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card search-card">
+
+        <h2>
+            📚 Disease Knowledge Center
+        </h2>
+
+        <div class="search-controls">
+
+            <input
+                type="text"
+                id="searchDisease"
+                placeholder="Search disease, crop or symptom..."
+                onkeyup="searchDiseases()"
+            >
+
+            <select
+                id="severityFilter"
+                onchange="filterBySeverity()"
+            >
+
+                <option value="">
+                    All Severity
+                </option>
+
+                <option value="Very High">
+                    Very High
+                </option>
+
+                <option value="High">
+                    High
+                </option>
+
+                <option value="Medium">
+                    Medium
+                </option>
+
+                <option value="Low">
+                    Low
+                </option>
+
+            </select>
+
+        </div>
+
+        <div
+            class="search-results"
+            id="searchResults"
+        >
+
+            <div class="no-result">
+                🌱 Search disease, crop or symptom.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/disease-data.js"></script>
+<script src="js/disease.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Agriculture - Solutions</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+.solution-page{
+    max-width:1200px;
+    margin:auto;
+}
+
+.solution-header{
+    margin-bottom:24px;
+}
+
+.solution-header h1{
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+.solution-header p{
+    color:#7D8982;
+    font-size:13px;
+}
+
+.search-box{
+    background:#fff;
+    border:1px solid #E1E8E4;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 5px 20px rgba(25,45,34,.06);
+    margin-bottom:22px;
+}
+
+.search-row{
+    display:grid;
+    grid-template-columns:1fr 1fr auto;
+    gap:12px;
+}
+
+.input-box{
+    position:relative;
+}
+
+.input-box i{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#237A45;
+}
+
+.input-box input,
+.input-box select{
+    width:100%;
+    height:46px;
+    padding:0 14px 0 40px;
+    border:1px solid #E1E8E4;
+    border-radius:8px;
+    outline:none;
+    background:#fff;
+    color:#17231D;
+    font-size:13px;
+}
+
+.input-box input:focus,
+.input-box select:focus{
+    border-color:#237A45;
+    box-shadow:0 0 0 3px rgba(35,122,69,.07);
+}
+
+.find-btn{
+    height:46px;
+    padding:0 22px;
+    border:0;
+    border-radius:8px;
+    background:#237A45;
+    color:white;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+}
+
+.find-btn:hover{
+    background:#195F37;
+}
+
+.empty{
+    background:#fff;
+    border:1px solid #E1E8E4;
+    border-radius:14px;
+    padding:55px 20px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(25,45,34,.06);
+}
+
+.empty i{
+    width:62px;
+    height:62px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 15px;
+    background:#EAF5EE;
+    color:#237A45;
+    border-radius:50%;
+    font-size:24px;
+}
+
+.empty h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.empty p{
+    color:#7D8982;
+    font-size:12px;
+}
+
+.result{
+    display:none;
+}
+
+.solution-card{
+    background:#fff;
+    border:1px solid #E1E8E4;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(25,45,34,.06);
+}
+
+.solution-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px;
+    border-bottom:1px solid #E1E8E4;
+}
+
+.title-area{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.disease-icon{
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#EAF5EE;
+    color:#237A45;
+    border-radius:12px;
+    font-size:21px;
+}
+
+.title-area h2{
+    font-size:21px;
+}
+
+.title-area p{
+    color:#7D8982;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.severity{
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.low{
+    background:#EAF5EE;
+    color:#237A45;
+}
+
+.medium{
+    background:#FFF7DD;
+    color:#947000;
+}
+
+.high{
+    background:#FFF0E5;
+    color:#B65C13;
+}
+
+.critical{
+    background:#FDECEC;
+    color:#B63232;
+}
+
+.content{
+    padding:25px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:20px;
+}
+
+.info-card{
+    border:1px solid #E1E8E4;
+    border-radius:11px;
+    padding:20px;
+}
+
+.info-card h3{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.info-card h3 i{
+    color:#237A45;
+}
+
+.info-card p,
+.info-card li{
+    color:#68756D;
+    font-size:12px;
+    line-height:1.8;
+}
+
+.info-card ul{
+    padding-left:18px;
+}
+
+.treatment{
+    border:1px solid #E1E8E4;
+    border-radius:11px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.treatment h3{
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+.step{
+    display:flex;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid #EDF1EE;
+}
+
+.step:last-child{
+    border-bottom:0;
+}
+
+.number{
+    width:30px;
+    height:30px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#EAF5EE;
+    color:#237A45;
+    font-size:11px;
+    font-weight:700;
+}
+
+.step h4{
+    font-size:13px;
+    margin-bottom:4px;
+}
+
+.step p{
+    color:#7D8982;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.advisory{
+    background:#EAF5EE;
+    border:1px solid #D5E9DC;
+    border-radius:11px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.advisory h3{
+    color:#195F37;
+    font-size:15px;
+    margin-bottom:7px;
+}
+
+.advisory p{
+    color:#536059;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.advice-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.advice{
+    border:1px solid #E1E8E4;
+    border-radius:11px;
+    padding:18px;
+}
+
+.advice i{
+    color:#237A45;
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.advice h4{
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.advice p{
+    color:#7D8982;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.action{
+    padding:11px 17px;
+    border:0;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:600;
+}
+
+.print{
+    background:#14211A;
+    color:white;
+}
+
+.save{
+    background:#EAF5EE;
+    color:#237A45;
+}
+
+.saved{
+    margin-top:20px;
+    background:#fff;
+    border:1px solid #E1E8E4;
+    border-radius:14px;
+    padding:20px;
+}
+
+.saved h3{
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.saved-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.saved-item{
+    padding:7px 11px;
+    border-radius:20px;
+    background:#EAF5EE;
+    color:#237A45;
+    font-size:11px;
+}
+
+@media(max-width:800px){
+
+    .search-row{
+        grid-template-columns:1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .advice-grid{
+        grid-template-columns:1fr;
+    }
+
+    .solution-head{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:15px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .solution-header h1{
+        font-size:25px;
+    }
+
+    .content,
+    .solution-head{
+        padding:18px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .action{
+        width:100%;
+    }
+
+}
+
+@media print{
+
+    .sidebar,
+    .menu-btn,
+    .topbar,
+    .search-box,
+    .saved{
+        display:none!important;
+    }
+
+    .main{
+        margin-left:0;
+        padding:0;
+    }
+
+    .solution-card{
+        box-shadow:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<button id="menuBtn" class="menu-btn">
+    <i class="fa-solid fa-bars"></i>
+</button>
+
+
+<div class="sidebar">
+
+<h2>
+    <i class="fa-solid fa-seedling"></i>
+    Smart Agri
+</h2>
+
+<ul>
+
+<li>
+<a href="dashboard.html">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</a>
+</li>
+
+<li>
+<a href="weather.html">
+<i class="fa-solid fa-cloud-sun"></i>
+Weather
+</a>
+</li>
+
+<li>
+<a href="crop.html">
+<i class="fa-solid fa-leaf"></i>
+Crop Upload
+</a>
+</li>
+
+<li>
+<a href="disease.html">
+<i class="fa-solid fa-bug"></i>
+Disease
+</a>
+</li>
+
+<li>
+<a href="solution.html" class="active">
+<i class="fa-solid fa-pills"></i>
+Solution
+</a>
+</li>
+
+<li>
+<a href="market.html">
+<i class="fa-solid fa-chart-line"></i>
+Market
+</a>
+</li>
+
+<li>
+<a href="scheme.html">
+<i class="fa-solid fa-building-columns"></i>
+Scheme
+</a>
+</li>
+
+<li>
+<a href="profile.html">
+<i class="fa-solid fa-user"></i>
+Profile
+</a>
+</li>
+
+<li>
+<a href="#" id="logoutBtn">
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+</a>
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="main">
+
+
+<div class="topbar">
+
+<h1>
+Disease Solutions
+</h1>
+
+<div class="top-right">
+
+<input
+type="text"
+id="globalSearch"
+placeholder="Search...">
+
+<button id="darkBtn">
+🌙 Dark Mode
+</button>
+
+</div>
+
+</div>
+
+
+<div class="solution-page">
+
+
+<div class="solution-header">
+
+<h1>
+<i class="fa-solid fa-shield-heart"></i>
+Treatment & Solutions
+</h1>
+
+<p>
+Find treatment, symptoms, prevention and crop management guidance.
+</p>
+
+</div>
+
+
+<div class="search-box">
+
+<div class="search-row">
+
+<div class="input-box">
+
+<i class="fa-solid fa-seedling"></i>
+
+<select id="crop">
+
+<option value="all">
+All Crops
+</option>
+
+<option value="rice">
+Rice
+</option>
+
+<option value="wheat">
+Wheat
+</option>
+
+<option value="cotton">
+Cotton
+</option>
+
+<option value="soybean">
+Soybean
+</option>
+
+<option value="sugarcane">
+Sugarcane
+</option>
+
+<option value="tomato">
+Tomato
+</option>
+
+<option value="potato">
+Potato
+</option>
+
+<option value="maize">
+Maize
+</option>
+
+</select>
+
+</div>
+
+
+<div class="input-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+id="disease"
+placeholder="Search disease...">
+
+</div>
+
+
+<button
+class="find-btn"
+onclick="findSolution()">
+
+Find Solution
+
+</button>
+
+</div>
+
+</div>
+
+
+<div id="empty" class="empty">
+
+<i class="fa-solid fa-leaf"></i>
+
+<h3>
+Select a Disease
+</h3>
+
+<p>
+Select a crop or search a disease to view its solution.
+</p>
+
+</div>
+
+
+<div id="result" class="result"></div>
+
+
+<div id="savedBox" class="saved">
+
+<h3>
+<i class="fa-solid fa-bookmark"></i>
+Saved Solutions
+</h3>
+
+<div id="savedList" class="saved-list">
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+const diseases = {
+
+"rice blast":{
+crop:"rice",
+name:"Rice Blast",
+severity:"High",
+cause:"Fungal infection favored by suitable humidity and prolonged leaf wetness.",
+symptoms:[
+"Spindle-shaped lesions on leaves.",
+"Brown or gray spots may develop.",
+"Severe infection can affect stems and panicles."
+],
+treatment:[
+["Remove infected material","Remove severely affected plant material where practical and maintain field sanitation."],
+["Improve field management","Avoid excessive nitrogen and maintain suitable crop spacing."],
+["Use approved treatment","Use an appropriate locally approved fungicide according to the product label and local guidance."],
+["Monitor the crop","Inspect new growth regularly and respond early if symptoms continue."]
+],
+prevention:[
+"Use healthy planting material.",
+"Maintain balanced crop nutrition.",
+"Maintain suitable crop spacing.",
+"Monitor fields regularly."
+]
+},
+
+"bacterial leaf blight":{
+crop:"rice",
+name:"Bacterial Leaf Blight",
+severity:"High",
+cause:"Bacterial disease that can spread under favorable moisture and field conditions.",
+symptoms:[
+"Water-soaked lesions along leaf margins.",
+"Leaves may turn yellow or dry.",
+"Severe infection can reduce plant vigor."
+],
+treatment:[
+["Maintain field sanitation","Remove or manage infected material according to local recommendations."],
+["Manage irrigation","Avoid unnecessary standing water and maintain appropriate drainage."],
+["Use approved management","Follow locally approved crop protection recommendations."],
+["Monitor spread","Inspect surrounding plants regularly."]
+],
+prevention:[
+"Use healthy planting material.",
+"Maintain field sanitation.",
+"Avoid excessive nitrogen.",
+"Use recommended resistant varieties."
+]
+},
+
+"wheat rust":{
+crop:"wheat",
+name:"Wheat Rust",
+severity:"High",
+cause:"Fungal disease that can spread through spores under favorable environmental conditions.",
+symptoms:[
+"Orange, yellow or brown pustules on leaves.",
+"Leaves may lose their green color.",
+"Severe infection may reduce crop growth."
+],
+treatment:[
+["Inspect the crop","Regularly inspect leaves for early symptoms."],
+["Manage infection sources","Maintain field hygiene and manage volunteer plants where appropriate."],
+["Approved fungicide","Use an approved fungicide according to its label and local recommendations."],
+["Continue monitoring","Monitor newly emerging leaves after management."]
+],
+prevention:[
+"Use resistant varieties when available.",
+"Maintain balanced fertilization.",
+"Scout fields regularly.",
+"Follow local agricultural advisories."
+]
+},
+
+"cotton leaf curl":{
+crop:"cotton",
+name:"Cotton Leaf Curl",
+severity:"High",
+cause:"Viral disease commonly associated with whitefly transmission.",
+symptoms:[
+"Leaves may curl.",
+"Leaf veins may become enlarged.",
+"Plants may show reduced growth."
+],
+treatment:[
+["Monitor insect vectors","Inspect plants regularly for whiteflies."],
+["Manage severely affected plants","Follow local recommendations for removal of severely affected plants."],
+["Control surrounding weeds","Keep field surroundings free from weeds that support insect populations."],
+["Follow local advisory","Use approved vector management practices."]
+],
+prevention:[
+"Use healthy planting material.",
+"Monitor whitefly populations.",
+"Control weeds.",
+"Follow recommended planting schedules."
+]
+},
+
+"soybean rust":{
+crop:"soybean",
+name:"Soybean Rust",
+severity:"Medium",
+cause:"Fungal disease that can develop under favorable moisture and temperature conditions.",
+symptoms:[
+"Reddish-brown lesions on leaves.",
+"Premature yellowing.",
+"Early leaf drop in severe infections."
+],
+treatment:[
+["Scout lower leaves","Inspect lower and middle canopy leaves regularly."],
+["Monitor conditions","Monitor weather and disease conditions."],
+["Approved fungicide","Use a suitable approved fungicide when locally recommended."],
+["Recheck crop","Continue monitoring after treatment."]
+],
+prevention:[
+"Use suitable varieties.",
+"Maintain good field management.",
+"Scout regularly.",
+"Follow agricultural advisories."
+]
+},
+
+"sugarcane red rot":{
+crop:"sugarcane",
+name:"Sugarcane Red Rot",
+severity:"High",
+cause:"Fungal disease that can affect stalks and reduce crop quality and yield.",
+symptoms:[
+"Internal stalk tissue may show red discoloration.",
+"Leaves may wilt or dry.",
+"Affected stalks may show internal lesions."
+],
+treatment:[
+["Remove infected material","Remove severely affected planting material according to local recommendations."],
+["Improve sanitation","Manage infected residues properly."],
+["Use healthy planting material","Select healthy planting material from reliable sources."],
+["Monitor nearby plants","Inspect surrounding areas for early symptoms."]
+],
+prevention:[
+"Use disease-free planting material.",
+"Maintain field sanitation.",
+"Avoid infected stalks.",
+"Use recommended resistant varieties."
+]
+},
+
+"tomato early blight":{
+crop:"tomato",
+name:"Tomato Early Blight",
+severity:"Medium",
+cause:"Fungal disease favored by warm, humid conditions and prolonged leaf wetness.",
+symptoms:[
+"Dark spots on older leaves.",
+"Concentric rings may appear.",
+"Affected leaves may yellow and drop."
+],
+treatment:[
+["Remove infected leaves","Remove severely affected leaves and dispose of them appropriately."],
+["Improve air circulation","Maintain suitable spacing and avoid prolonged leaf wetness."],
+["Approved fungicide","Use a locally approved fungicide when appropriate."],
+["Monitor new growth","Inspect new leaves regularly."]
+],
+prevention:[
+"Avoid prolonged leaf wetness.",
+"Maintain crop spacing.",
+"Remove infected debris.",
+"Rotate crops where practical."
+]
+},
+
+"potato late blight":{
+crop:"potato",
+name:"Potato Late Blight",
+severity:"Critical",
+cause:"A destructive disease that can spread rapidly under cool and wet conditions.",
+symptoms:[
+"Dark water-soaked leaf lesions.",
+"White growth may occur under humid conditions.",
+"Tubers can develop dark internal damage."
+],
+treatment:[
+["Inspect fields frequently","Scout crops frequently during cool and wet weather."],
+["Manage affected material","Manage severely affected plant material according to local recommendations."],
+["Approved treatment","Use locally approved crop protection products according to the label."],
+["Protect healthy crop","Continue monitoring weather and disease development."]
+],
+prevention:[
+"Use healthy seed tubers.",
+"Avoid unnecessary leaf wetness.",
+"Maintain field drainage.",
+"Follow local disease forecasting."
+]
+},
+
+"maize leaf blight":{
+crop:"maize",
+name:"Maize Leaf Blight",
+severity:"Medium",
+cause:"Fungal disease that may increase under warm and humid conditions.",
+symptoms:[
+"Long brown or gray leaf lesions.",
+"Lesions may expand during favorable weather.",
+"Severe infection can reduce photosynthetic area."
+],
+treatment:[
+["Scout the crop","Inspect leaves regularly."],
+["Maintain field hygiene","Manage infected crop residue where appropriate."],
+["Use approved treatment","Follow local recommendations for crop protection."],
+["Monitor progression","Continue inspecting new leaves."]
+],
+prevention:[
+"Use suitable varieties.",
+"Maintain field sanitation.",
+"Rotate crops where practical.",
+"Avoid excessive plant density."
+]
+}
+
+};
+
+
+function findSolution(){
+
+let search=
+document.getElementById("disease")
+.value
+.toLowerCase()
+.trim();
+
+let crop=
+document.getElementById("crop")
+.value;
+
+let found=null;
+
+for(let key in diseases){
+
+let data=diseases[key];
+
+let cropMatch=
+crop==="all" ||
+data.crop===crop;
+
+let searchMatch=
+search==="" ||
+key.includes(search) ||
+data.name.toLowerCase().includes(search) ||
+data.crop.includes(search);
+
+if(cropMatch && searchMatch){
+
+found=data;
+break;
+
+}
+
+}
+
+if(!found){
+
+showEmpty("Disease Not Found","Try another disease name or select another crop.");
+
+return;
+
+}
+
+display(found);
+
+}
+
+
+function display(data){
+
+document.getElementById("empty")
+.style.display="none";
+
+document.getElementById("result")
+.style.display="block";
+
+
+let symptomHTML="";
+
+data.symptoms.forEach(item=>{
+
+symptomHTML+=
+`<li>${item}</li>`;
+
+});
+
+
+let preventionHTML="";
+
+data.prevention.forEach(item=>{
+
+preventionHTML+=
+`<li>${item}</li>`;
+
+});
+
+
+let treatmentHTML="";
+
+data.treatment.forEach((item,index)=>{
+
+treatmentHTML+=`
+
+<div class="step">
+
+<div class="number">
+${index+1}
+</div>
+
+<div>
+
+<h4>
+${item[0]}
+</h4>
+
+<p>
+${item[1]}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+
+let severityClass=
+data.severity.toLowerCase();
+
+
+document.getElementById("result").innerHTML=`
+
+<div class="solution-card">
+
+<div class="solution-head">
+
+<div class="title-area">
+
+<div class="disease-icon">
+<i class="fa-solid fa-leaf"></i>
+</div>
+
+<div>
+
+<h2>
+${data.name}
+</h2>
+
+<p>
+Crop: ${data.crop.charAt(0).toUpperCase()+data.crop.slice(1)}
+</p>
+
+</div>
+
+</div>
+
+<span class="severity ${severityClass}">
+${data.severity}
+</span>
+
+</div>
+
+
+<div class="content">
+
+
+<div class="grid">
+
+
+<div class="info-card">
+
+<h3>
+<i class="fa-solid fa-triangle-exclamation"></i>
+Symptoms
+</h3>
+
+<ul>
+${symptomHTML}
+</ul>
+
+</div>
+
+
+<div class="info-card">
+
+<h3>
+<i class="fa-solid fa-virus"></i>
+Possible Cause
+</h3>
+
+<p>
+${data.cause}
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="treatment">
+
+<h3>
+<i class="fa-solid fa-list-check"></i>
+Recommended Treatment
+</h3>
+
+${treatmentHTML}
+
+</div>
+
+
+<div class="info-card"
+style="margin-bottom:20px;">
+
+<h3>
+<i class="fa-solid fa-shield"></i>
+Prevention
+</h3>
+
+<ul>
+${preventionHTML}
+</ul>
+
+</div>
+
+
+<div class="advisory">
+
+<h3>
+<i class="fa-solid fa-lightbulb"></i>
+Important Advisory
+</h3>
+
+<p>
+Use crop protection products only when appropriate.
+Always follow the product label, local agricultural
+recommendations and required safety precautions.
+</p>
+
+</div>
+
+
+<div class="advice-grid">
+
+
+<div class="advice">
+
+<i class="fa-solid fa-cloud-sun"></i>
+
+<h4>
+Weather Monitoring
+</h4>
+
+<p>
+Monitor humidity, rainfall and temperature because
+environmental conditions can influence disease spread.
+</p>
+
+</div>
+
+
+<div class="advice">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<h4>
+Regular Scouting
+</h4>
+
+<p>
+Inspect your crop regularly and look for new or
+increasing symptoms.
+</p>
+
+</div>
+
+
+<div class="advice">
+
+<i class="fa-solid fa-user-doctor"></i>
+
+<h4>
+Expert Advice
+</h4>
+
+<p>
+Consult a local agriculture expert when disease
+identification is uncertain.
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="action print"
+onclick="window.print()">
+
+<i class="fa-solid fa-print"></i>
+Print Solution
+
+</button>
+
+
+<button
+class="action save"
+onclick="saveSolution('${data.name}')">
+
+<i class="fa-solid fa-bookmark"></i>
+Save Solution
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+function showEmpty(title,text){
+
+document.getElementById("result")
+.style.display="none";
+
+let empty=
+document.getElementById("empty");
+
+empty.style.display="block";
+
+empty.innerHTML=`
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<h3>
+${title}
+</h3>
+
+<p>
+${text}
+</p>
+
+`;
+
+}
+
+
+function saveSolution(name){
+
+let saved=
+JSON.parse(
+localStorage.getItem("smartAgriSolutions") || "[]"
+);
+
+if(!saved.includes(name)){
+
+saved.push(name);
+
+localStorage.setItem(
+"smartAgriSolutions",
+JSON.stringify(saved)
+);
+
+alert(name+" saved successfully.");
+
+loadSaved();
+
+}else{
+
+alert(name+" is already saved.");
+
+}
+
+}
+
+
+function loadSaved(){
+
+let saved=
+JSON.parse(
+localStorage.getItem("smartAgriSolutions") || "[]"
+);
+
+let box=
+document.getElementById("savedList");
+
+if(saved.length===0){
+
+box.innerHTML=
+`<span style="color:#7D8982;font-size:11px;">
+No saved solutions yet.
+</span>`;
+
+return;
+
+}
+
+box.innerHTML="";
+
+saved.forEach(item=>{
+
+box.innerHTML+=`
+
+<span class="saved-item">
+${item}
+</span>
+
+`;
+
+});
+
+}
+
+
+document
+.getElementById("disease")
+.addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
+
+findSolution();
+
+}
+
+});
+
+
+document
+.getElementById("crop")
+.addEventListener("change",function(){
+
+if(
+document.getElementById("disease")
+.value.trim()!==""
+){
+
+findSolution();
+
+}
+
+});
+
+
+loadSaved();
+
+
+const darkBtn=
+document.getElementById("darkBtn");
+
+if(darkBtn){
+
+darkBtn.addEventListener("click",function(){
+
+document.body.classList.toggle("dark");
+
+});
+
+}
+
+
+const logoutBtn=
+document.getElementById("logoutBtn");
+
+if(logoutBtn){
+
+logoutBtn.addEventListener("click",function(e){
+
+e.preventDefault();
+
+localStorage.clear();
+
+window.location.href="index.html";
+
+});
+
+}
+
+
+</script>
+
+</body>
+
+</html>

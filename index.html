@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Agri</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:#f7f9f8;
+    color:#26332c;
+    font-size:14px;
+}
+
+
+/* NAVBAR */
+
+.navbar{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#14211a;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#fff;
+    font-size:22px;
+    font-weight:700;
+}
+
+.logo i{
+    color:#68c18e;
+    font-size:25px;
+}
+
+.navbar nav{
+    display:flex;
+    gap:30px;
+}
+
+.navbar nav a{
+    color:#bfc9c3;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active{
+    color:#fff;
+}
+
+
+/* HERO */
+
+.hero{
+    max-width:950px;
+    min-height:540px;
+    margin:auto;
+    padding:75px 6%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+}
+
+.hero-content{
+    max-width:680px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 14px;
+
+    background:#eaf5ee;
+    color:#237746;
+
+    border-radius:20px;
+
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1.2px;
+}
+
+.badge i{
+    font-size:11px;
+}
+
+.hero h1{
+    margin-top:22px;
+
+    color:#17231d;
+
+    font-size:54px;
+    line-height:1.08;
+    letter-spacing:-1px;
+}
+
+.hero h1 span{
+    color:#237746;
+}
+
+.hero p{
+    max-width:590px;
+
+    margin:22px auto 0;
+
+    color:#7d8982;
+
+    font-size:14px;
+    line-height:1.9;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+
+    margin-top:30px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+
+    min-height:45px;
+
+    padding:0 21px;
+
+    border-radius:9px;
+
+    text-decoration:none;
+
+    font-size:12px;
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.btn-primary{
+    background:#237a45;
+    color:#fff;
+
+    box-shadow:0 5px 14px rgba(31,122,77,.14);
+}
+
+.btn-primary:hover{
+    background:#195f37;
+    transform:translateY(-2px);
+}
+
+.btn-secondary{
+    background:#fff;
+    color:#26332c;
+
+    border:1px solid #e1e8e4;
+}
+
+.btn-secondary:hover{
+    border-color:#b8d4c3;
+    transform:translateY(-2px);
+}
+
+
+/* FEATURES */
+
+.features{
+    max-width:1050px;
+    margin:auto;
+
+    padding:70px 5%;
+}
+
+.heading{
+    text-align:center;
+
+    margin-bottom:38px;
+}
+
+.heading span{
+    color:#237746;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:1.5px;
+}
+
+.heading h2{
+    margin-top:9px;
+
+    color:#17231d;
+
+    font-size:30px;
+}
+
+.heading p{
+    margin-top:10px;
+
+    color:#89938d;
+
+    font-size:12px;
+}
+
+
+.feature-grid{
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+}
+
+.feature-card{
+    padding:25px;
+
+    background:#fff;
+
+    border:1px solid #e4ebe7;
+
+    border-radius:14px;
+
+    box-shadow:0 4px 18px rgba(25,45,34,.04);
+
+    display:flex;
+    align-items:flex-start;
+
+    gap:17px;
+
+    transition:.2s;
+}
+
+.feature-card:hover{
+    transform:translateY(-3px);
+
+    box-shadow:0 9px 25px rgba(25,45,34,.08);
+}
+
+.feature-icon{
+    width:45px;
+    height:45px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:#eaf5ee;
+    color:#237746;
+
+    font-size:17px;
+}
+
+.feature-card h3{
+    color:#17231d;
+
+    font-size:15px;
+}
+
+.feature-card p{
+    margin-top:7px;
+
+    color:#89938d;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+
+/* ABOUT */
+
+.about{
+    max-width:1050px;
+
+    margin:auto;
+
+    padding:70px 5%;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    align-items:center;
+
+    gap:65px;
+}
+
+.about-box{
+    height:310px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#eaf5ee;
+
+    border-radius:21px;
+}
+
+.about-circle{
+    width:180px;
+    height:180px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    box-shadow:0 5px 20px rgba(25,45,34,.07);
+}
+
+.about-circle i{
+    color:#237746;
+
+    font-size:37px;
+
+    margin-bottom:11px;
+}
+
+.about-circle h3{
+    color:#17231d;
+
+    font-size:15px;
+}
+
+.about-circle p{
+    margin-top:5px;
+
+    color:#89938d;
+
+    font-size:10px;
+}
+
+.about-content span{
+    color:#237746;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:1.5px;
+}
+
+.about-content h2{
+    margin-top:10px;
+
+    color:#17231d;
+
+    font-size:31px;
+
+    line-height:1.25;
+}
+
+.about-content p{
+    margin-top:16px;
+
+    max-width:500px;
+
+    color:#89938d;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+.about-list{
+    margin-top:20px;
+
+    display:grid;
+
+    gap:10px;
+}
+
+.about-list div{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    color:#536059;
+
+    font-size:11px;
+}
+
+.about-list i{
+    color:#237746;
+
+    font-size:11px;
+}
+
+
+/* FOUNDER */
+
+.founder{
+    max-width:800px;
+
+    margin:10px auto 75px;
+
+    padding:35px 38px;
+
+    background:#fff;
+
+    border:1px solid #e4ebe7;
+
+    border-radius:17px;
+
+    box-shadow:0 5px 20px rgba(25,45,34,.05);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+}
+
+.founder-icon{
+    width:72px;
+    height:72px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#eaf5ee;
+
+    color:#237746;
+
+    border-radius:50%;
+
+    font-size:25px;
+}
+
+.founder-info span{
+    color:#237746;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:1.5px;
+}
+
+.founder-info h2{
+    margin-top:6px;
+
+    color:#17231d;
+
+    font-size:25px;
+}
+
+.founder-info p{
+    margin-top:4px;
+
+    color:#89938d;
+
+    font-size:11px;
+}
+
+.quote{
+    margin-top:10px;
+
+    color:#237746;
+
+    font-size:11px;
+
+    font-style:italic;
+
+    line-height:1.6;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#14211a;
+
+    padding:34px 7% 20px;
+
+    color:#fff;
+}
+
+.footer-content{
+    max-width:1050px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:30px;
+}
+
+.footer-text p{
+    margin-top:8px;
+
+    max-width:320px;
+
+    color:#87938c;
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+.footer-links{
+    display:flex;
+
+    gap:20px;
+}
+
+.footer-links a{
+    color:#89968f;
+
+    text-decoration:none;
+
+    font-size:10px;
+}
+
+.footer-links a:hover{
+    color:#fff;
+}
+
+.footer-bottom{
+    max-width:1050px;
+
+    margin:23px auto 0;
+
+    padding-top:16px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#66736c;
+
+    font-size:9px;
+}
+
+
+/* TABLET */
+
+@media(max-width:850px){
+
+    .hero{
+        min-height:510px;
+
+        padding:65px 6%;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .about{
+        grid-template-columns:1fr;
+
+        gap:42px;
+    }
+
+    .about-box{
+        max-width:500px;
+
+        width:100%;
+
+        margin:auto;
+    }
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .navbar{
+        height:auto;
+
+        padding:17px 5%;
+
+        flex-direction:column;
+
+        gap:14px;
+    }
+
+    .navbar nav{
+        gap:16px;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+    }
+
+    .navbar nav a{
+        font-size:11px;
+    }
+
+
+    .hero{
+        min-height:480px;
+
+        padding:55px 6%;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .hero p{
+        font-size:12px;
+    }
+
+    .badge{
+        font-size:9px;
+    }
+
+    .hero-buttons{
+        flex-wrap:wrap;
+    }
+
+
+    .features{
+        padding:55px 6%;
+    }
+
+    .heading h2{
+        font-size:26px;
+    }
+
+    .heading p{
+        font-size:11px;
+    }
+
+
+    .feature-card{
+        padding:21px;
+    }
+
+    .feature-card h3{
+        font-size:14px;
+    }
+
+    .feature-card p{
+        font-size:10px;
+    }
+
+
+    .about{
+        padding:55px 6%;
+    }
+
+    .about-content h2{
+        font-size:27px;
+    }
+
+    .about-content p{
+        font-size:11px;
+    }
+
+
+    .founder{
+        margin:10px 5% 60px;
+
+        padding:30px 22px;
+
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+
+    .footer-content{
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+    .footer-links{
+        flex-wrap:wrap;
+
+        justify-content:center;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+
+        gap:8px;
+
+        text-align:center;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-seedling"></i>
+
+        <span>Smart Agri</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html" class="active">
+            Home
+        </a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+        <a href="register.html">
+            Register
+        </a>
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+
+        <div class="badge">
+
+            <i class="fa-solid fa-leaf"></i>
+
+            SMART AGRICULTURE PLATFORM
+
+        </div>
+
+
+        <h1>
+
+            Grow Smarter.<br>
+
+            <span>Farm Better.</span>
+
+        </h1>
+
+
+        <p>
+
+            Smart Agri is a simple and modern agriculture
+            platform that helps farmers manage crops,
+            understand diseases, check weather and access
+            useful agricultural information.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+
+            <a href="register.html"
+               class="btn btn-primary">
+
+                Get Started
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+
+            <a href="login.html"
+               class="btn btn-secondary">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Login
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- FEATURES -->
+
+<section class="features" id="features">
+
+
+    <div class="heading">
+
+        <span>SMART AGRICULTURE</span>
+
+        <h2>Smart Tools For Farmers</h2>
+
+        <p>
+            Essential farming tools in one simple platform.
+        </p>
+
+    </div>
+
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+
+                <i class="fa-solid fa-cloud-sun"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Weather</h3>
+
+                <p>
+                    Check weather information for
+                    better farming decisions.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+
+                <i class="fa-solid fa-seedling"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Crop Management</h3>
+
+                <p>
+                    Manage and organize your crops easily.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+
+                <i class="fa-solid fa-microscope"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Disease Detection</h3>
+
+                <p>
+                    Find useful information about
+                    crop diseases.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Market Prices</h3>
+
+                <p>
+                    Check crop prices and market
+                    information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+
+    <div class="about-box">
+
+
+        <div class="about-circle">
+
+            <i class="fa-solid fa-tractor"></i>
+
+            <h3>Smart Farming</h3>
+
+            <p>
+                Technology for better agriculture
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="about-content">
+
+
+        <span>ABOUT SMART AGRI</span>
+
+
+        <h2>
+
+            Technology For
+            Modern Farming
+
+        </h2>
+
+
+        <p>
+
+            Smart Agri brings essential farming
+            information and tools together in one
+            simple and farmer-friendly platform.
+
+        </p>
+
+
+        <div class="about-list">
+
+
+            <div>
+
+                <i class="fa-solid fa-check"></i>
+
+                Easy to use
+
+            </div>
+
+
+            <div>
+
+                <i class="fa-solid fa-check"></i>
+
+                Farmer friendly
+
+            </div>
+
+
+            <div>
+
+                <i class="fa-solid fa-check"></i>
+
+                Smart agricultural tools
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- FOUNDER -->
+
+<section class="founder">
+
+
+    <div class="founder-icon">
+
+        <i class="fa-solid fa-user"></i>
+
+    </div>
+
+
+    <div class="founder-info">
+
+
+        <span>FOUNDER</span>
+
+
+        <h2>
+            Mr. Kunal Pote
+        </h2>
+
+
+        <p>
+            Founder of Smart Agri
+        </p>
+
+
+        <div class="quote">
+
+            “Empowering farmers with smarter
+            technology for a better agricultural future.”
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+
+    <div class="footer-content">
+
+
+        <div class="footer-text">
+
+
+            <div class="logo">
+
+                <i class="fa-solid fa-seedling"></i>
+
+                <span>Smart Agri</span>
+
+            </div>
+
+
+            <p>
+
+                A simple smart agriculture platform
+                for modern farmers.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="footer-links">
+
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="login.html">
+                Login
+            </a>
+
+
+            <a href="register.html">
+                Register
+            </a>
+
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+
+        <span>
+            © 2026 Smart Agri. All Rights Reserved.
+        </span>
+
+
+        <span>
+            Founded by Mr. Kunal Pote
+        </span>
+
+
+    </div>
+
+
+</footer>
+
+
+</body>
+
+</html>
