@@ -1,38 +1,28 @@
-const isLoggedIn = localStorage.getItem("isLoggedIn");
+const loginStatus = localStorage.getItem("login");
 
-if (isLoggedIn !== "true") {
+if (loginStatus !== "true") {
     window.location.href = "login.html";
 }
 
-
 const savedUser = JSON.parse(
-    localStorage.getItem("farmerUser")
+    localStorage.getItem("farmer")
 ) || {};
 
-const farmerName =
-    localStorage.getItem("farmerName") ||
-    savedUser.name ||
-    "Farmer";
+const farmerName = savedUser.name || "Farmer";
 
-
-const farmerNameElement =
-    document.getElementById("farmerName");
+const farmerNameElement = document.getElementById("farmerName");
 
 if (farmerNameElement) {
     farmerNameElement.textContent = farmerName;
 }
 
-
-const welcomeUser =
-    document.getElementById("welcomeUser");
+const welcomeUser = document.getElementById("welcomeUser");
 
 if (welcomeUser) {
     welcomeUser.textContent = farmerName;
 }
 
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
+const logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
 
@@ -42,7 +32,8 @@ if (logoutBtn) {
 
         if (confirm("Do you want to logout?")) {
 
-            localStorage.removeItem("isLoggedIn");
+            localStorage.setItem("login", "false");
+            localStorage.removeItem("currentFarmer");
 
             window.location.href = "login.html";
         }
@@ -51,99 +42,75 @@ if (logoutBtn) {
 
 }
 
-
 const crops =
     JSON.parse(
         localStorage.getItem("smartAgriCrops")
-    ) || JSON.parse(
+    ) ||
+    JSON.parse(
         localStorage.getItem("crops")
-    ) || [];
+    ) ||
+    [];
 
-
-const cropCount =
-    document.getElementById("cropCount");
+const cropCount = document.getElementById("cropCount");
 
 if (cropCount) {
     cropCount.textContent = crops.length;
 }
 
+const diseaseCount = document.getElementById("diseaseCount");
 
-const diseaseCount =
-    document.getElementById("diseaseCount");
-
-const diseaseName =
-    localStorage.getItem("DiseaseName");
+const diseaseName = localStorage.getItem("DiseaseName");
 
 if (diseaseCount) {
-
-    diseaseCount.textContent =
-        diseaseName ? "1" : "0";
-
+    diseaseCount.textContent = diseaseName ? "1" : "0";
 }
 
-
-const searchInput =
-    document.getElementById("searchInput");
+const searchInput = document.getElementById("searchInput");
 
 if (searchInput) {
 
-    searchInput.addEventListener(
-        "input",
-        function() {
+    searchInput.addEventListener("input", function() {
 
-            const value =
-                this.value.toLowerCase().trim();
+        const value =
+            this.value.toLowerCase().trim();
 
-            const cards =
-                document.querySelectorAll(".card");
+        const cards =
+            document.querySelectorAll(".card");
 
-            cards.forEach(function(card) {
+        cards.forEach(function(card) {
 
-                const text =
-                    card.innerText.toLowerCase();
+            const text =
+                card.innerText.toLowerCase();
 
-                if (text.includes(value)) {
+            if (text.includes(value)) {
+                card.style.display = "";
+            } else {
+                card.style.display = "none";
+            }
 
-                    card.style.display = "";
+        });
 
-                } else {
-
-                    card.style.display = "none";
-
-                }
-
-            });
-
-        }
-    );
+    });
 
 }
 
-
-const darkBtn =
-    document.getElementById("darkBtn");
+const darkBtn = document.getElementById("darkBtn");
 
 if (darkBtn) {
 
-    darkBtn.addEventListener(
-        "click",
-        function() {
+    darkBtn.addEventListener("click", function() {
 
-            document.body.classList.toggle("dark");
+        document.body.classList.toggle("dark");
 
-        }
-    );
+    });
 
 }
 
-
-const todayDate =
-    document.getElementById("todayDate");
+const todayDate = document.getElementById("todayDate");
 
 if (todayDate) {
 
-    const today =
-        new Date();
+    const today = new Date();
 
     todayDate.textContent =
         today.toLocaleDateString(
@@ -157,7 +124,6 @@ if (todayDate) {
 
 }
 
-
 function updateTime() {
 
     const currentTime =
@@ -167,8 +133,7 @@ function updateTime() {
         return;
     }
 
-    const now =
-        new Date();
+    const now = new Date();
 
     currentTime.textContent =
         now.toLocaleTimeString(
@@ -183,14 +148,12 @@ function updateTime() {
 
 }
 
-
 updateTime();
 
 setInterval(
     updateTime,
     1000
 );
-
 
 function calculateProfit() {
 
@@ -203,12 +166,12 @@ function calculateProfit() {
     const resultElement =
         document.getElementById("profitResult");
 
-    if (!costElement ||
+    if (
+        !costElement ||
         !incomeElement ||
-        !resultElement) {
-
+        !resultElement
+    ) {
         return;
-
     }
 
     const cost =
@@ -221,19 +184,21 @@ function calculateProfit() {
         income - cost;
 
     resultElement.textContent =
-        "Profit : ₹" + profit.toLocaleString("en-IN");
+        "Profit : ₹" +
+        profit.toLocaleString("en-IN");
 
 }
-
 
 function downloadReport() {
 
     const crops =
         JSON.parse(
             localStorage.getItem("smartAgriCrops")
-        ) || JSON.parse(
+        ) ||
+        JSON.parse(
             localStorage.getItem("crops")
-        ) || [];
+        ) ||
+        [];
 
     let text =
         "SMART AGRICULTURE PLATFORM\n";
@@ -289,7 +254,6 @@ function downloadReport() {
 
     }
 
-
     const file =
         new Blob(
             [text],
@@ -297,7 +261,6 @@ function downloadReport() {
                 type: "text/plain"
             }
         );
-
 
     const link =
         document.createElement("a");
