@@ -6,16 +6,16 @@ function register() {
     const password = document.getElementById("password").value;
 
     if (!name || !mobile || !email || !address || !password) {
-        alert("Please fill all fields.");
+        alert("Please fill all fields");
         return;
     }
 
-    if (password.length < 6) {
-        alert("Password must be at least 6 characters.");
+    if (password.length < 4) {
+        alert("Password must be at least 4 characters");
         return;
     }
 
-    const user = {
+    const farmer = {
         name: name,
         mobile: mobile,
         email: email,
@@ -23,53 +23,46 @@ function register() {
         password: password
     };
 
-    localStorage.setItem("farmerUser", JSON.stringify(user));
-    localStorage.setItem("farmerName", name);
+    localStorage.setItem("farmer", JSON.stringify(farmer));
+    localStorage.setItem("registered", "true");
+    localStorage.setItem("login", "false");
 
-    alert("Registration successful!");
-
+    alert("Registration Successful");
     window.location.href = "login.html";
 }
-
 
 function login() {
     const email = document.getElementById("loginEmail").value.trim().toLowerCase();
     const password = document.getElementById("loginPassword").value;
 
     if (!email || !password) {
-        alert("Please enter email and password.");
+        alert("Please enter email and password");
         return;
     }
 
-    const savedUser = localStorage.getItem("farmerUser");
+    const farmerData = localStorage.getItem("farmer");
 
-    if (!savedUser) {
-        alert("Please register first.");
+    if (!farmerData) {
+        alert("Please register first");
+        window.location.href = "register.html";
         return;
     }
 
-    const user = JSON.parse(savedUser);
+    const farmer = JSON.parse(farmerData);
 
-    if (email === user.email && password === user.password) {
+    if (email === farmer.email && password === farmer.password) {
+        localStorage.setItem("login", "true");
+        localStorage.setItem("currentFarmer", JSON.stringify(farmer));
 
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("farmerName", user.name);
-
+        alert("Login Successful");
         window.location.href = "dashboard.html";
-
     } else {
-        alert("Invalid email or password.");
+        alert("Invalid email or password");
     }
 }
-
 
 function logout() {
-    localStorage.removeItem("isLoggedIn");
-    window.location.href = "login.html";
-}
-
-
-function logoutUser() {
-    localStorage.removeItem("isLoggedIn");
+    localStorage.setItem("login", "false");
+    localStorage.removeItem("currentFarmer");
     window.location.href = "login.html";
 }
