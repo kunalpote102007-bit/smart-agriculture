@@ -1,789 +1,579 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Smart Agri | Dashboard</title>
-
-<link rel="stylesheet" href="css/dashboard.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<title>Dashboard | Smart Agriculture Platform</title>
 
 <style>
 
-:root{
-    --green:#1f7a4d;
-    --green-light:#eaf6ef;
-    --green-soft:#f5faf7;
-
-    --dark:#17231d;
-    --text:#26332c;
-    --muted:#89938d;
-
-    --bg:#f6f8f7;
-    --white:#ffffff;
-
-    --border:#e8edea;
-
-    --blue:#477db8;
-    --blue-light:#edf4fb;
-
-    --gold:#b88a35;
-    --gold-light:#faf3e3;
-
-    --red:#c75b63;
-    --red-light:#fff0f1;
-
-    --shadow:0 4px 18px rgba(27,48,37,.05);
-    --shadow-hover:0 10px 28px rgba(27,48,37,.09);
-}
-
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+}
+
+:root{
+    --green:#198754;
+    --green-dark:#0f5132;
+    --green-light:#e9f7ef;
+    --bg:#f4f8f6;
+    --white:#ffffff;
+    --text:#17251d;
+    --muted:#718078;
+    --border:#e2ebe5;
+    --danger:#dc3545;
+    --shadow:0 8px 30px rgba(16,61,37,.07);
 }
 
 body{
     background:var(--bg);
     color:var(--text);
-    font-family:Inter,Segoe UI,Arial,sans-serif;
+    min-height:100vh;
+    transition:.3s;
 }
-
-/* SIDEBAR */
 
 .sidebar{
-    background:#14211a;
-    border-right:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:linear-gradient(180deg,#0f5132,#123b27);
+    color:white;
+    padding:26px 17px;
+    overflow-y:auto;
+    z-index:1000;
+    box-shadow:8px 0 30px rgba(15,81,50,.12);
 }
 
-.sidebar h2{
-    color:#fff;
+.logo{
+    padding:7px 10px 25px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.logo-icon{
+    width:50px;
+    height:50px;
+    border-radius:15px;
+    background:rgba(255,255,255,.13);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    margin-bottom:13px;
+}
+
+.logo h2{
     font-size:20px;
+    font-weight:700;
 }
 
-.sidebar h2 i{
-    color:#5fbd88;
+.logo p{
+    color:#b9d6c5;
+    font-size:11px;
+    margin-top:6px;
 }
 
-.sidebar ul li{
-    margin:4px 10px;
+.nav{
+    margin-top:24px;
 }
 
-.sidebar ul li a{
-    color:#9daaa2;
-    border-radius:9px;
-    transition:.25s ease;
+.nav a{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    color:#d9e9df;
+    text-decoration:none;
+    padding:13px 14px;
+    margin-bottom:7px;
+    border-radius:11px;
+    font-size:13px;
+    transition:.25s;
 }
 
-.sidebar ul li a:hover{
-    color:#fff;
-    background:rgba(255,255,255,.06);
+.nav a:hover{
+    background:rgba(255,255,255,.1);
+    color:white;
+    transform:translateX(3px);
 }
 
-.sidebar ul li a:hover i{
-    color:#65c990;
+.nav a.active{
+    background:white;
+    color:var(--green-dark);
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
 }
 
-.sidebar ul li a i{
-    color:#718078;
+.nav-icon{
+    width:22px;
+    text-align:center;
+    font-size:16px;
 }
-
-/* MAIN */
 
 .main{
+    margin-left:250px;
     min-height:100vh;
-    padding:26px 32px 45px;
+    padding:30px;
 }
-
-/* TOPBAR */
 
 .topbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding-bottom:24px;
-    margin-bottom:6px;
-
-    border-bottom:1px solid var(--border);
-
-    background:transparent;
-}
-
-.topbar h1{
-    color:var(--dark);
-    font-size:24px;
-    font-weight:700;
-    letter-spacing:-.4px;
-}
-
-.topbar h1 span{
-    color:var(--green);
-}
-
-.top-subtitle{
-    margin-top:5px;
-    color:var(--muted);
-    font-size:11px;
-}
-
-.top-right{
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
-
-#searchInput{
-    width:210px;
-    height:39px;
-
-    padding:0 14px;
-
+    background:white;
     border:1px solid var(--border);
-    border-radius:9px;
+    border-radius:18px;
+    padding:20px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+    box-shadow:var(--shadow);
+}
 
-    background:var(--white);
-
-    outline:none;
+.welcome h1{
     color:var(--text);
-
-    font-size:11px;
-
-    transition:.2s;
-}
-
-#searchInput:focus{
-    border-color:#acd6bd;
-    box-shadow:0 0 0 3px rgba(31,122,77,.06);
-}
-
-#darkBtn{
-    height:39px;
-
-    padding:0 13px;
-
-    border:none;
-    border-radius:9px;
-
-    background:var(--white);
-    border:1px solid var(--border);
-
-    color:#68736d;
-
-    font-size:10px;
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-#darkBtn:hover{
-    background:#f0f4f2;
-}
-
-/* WELCOME */
-
-.welcome{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:28px 0 27px;
-}
-
-.welcome h2{
     font-size:25px;
-    font-weight:700;
-    color:var(--dark);
+    font-weight:750;
 }
 
-.welcome h2 span{
+.welcome h1 span{
     color:var(--green);
 }
 
 .welcome p{
-    margin-top:7px;
     color:var(--muted);
-    font-size:11px;
+    font-size:12px;
+    margin-top:7px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .date-box{
-    text-align:right;
-}
-
-.date-box span{
-    display:block;
-    color:var(--muted);
-    font-size:9px;
-    margin-bottom:4px;
-}
-
-.date-box strong{
-    font-size:12px;
-    color:var(--text);
-}
-
-/* STATISTICS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:13px;
-
-    margin-bottom:23px;
-}
-
-.stat-card{
-    background:var(--white);
-
-    border:1px solid var(--border);
-    border-radius:13px;
-
-    padding:18px;
-
-    box-shadow:var(--shadow);
-
-    transition:.25s ease;
-}
-
-.stat-card:hover{
-    transform:translateY(-2px);
-    box-shadow:var(--shadow-hover);
-}
-
-.stat-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.stat-icon{
-    width:36px;
-    height:36px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:9px;
-
-    font-size:14px;
-}
-
-.green{
-    color:var(--green);
     background:var(--green-light);
-}
-
-.blue{
-    color:var(--blue);
-    background:var(--blue-light);
-}
-
-.gold{
-    color:var(--gold);
-    background:var(--gold-light);
-}
-
-.red{
-    color:var(--red);
-    background:var(--red-light);
-}
-
-.stat-card h2{
-    font-size:24px;
-    margin-top:15px;
-    color:var(--dark);
-}
-
-.stat-card p{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:3px;
-}
-
-/* WEATHER */
-
-.content-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    margin-bottom:17px;
-}
-
-.weather-card{
-    background:var(--white);
-
-    border:1px solid var(--border);
-    border-radius:14px;
-
-    padding:22px;
-
-    box-shadow:var(--shadow);
-}
-
-.weather-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.weather-title h2{
-    font-size:17px;
-    color:var(--dark);
-}
-
-.weather-location{
-    color:var(--muted);
-    font-size:9px;
-    margin-top:4px;
-}
-
-.weather-icon{
-    width:45px;
-    height:45px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:12px;
-
-    background:var(--blue-light);
-    color:var(--blue);
-
-    font-size:20px;
-}
-
-.temperature{
-    margin-top:24px;
-
-    font-size:42px;
-    font-weight:700;
-
-    color:var(--dark);
-}
-
-.weather-condition{
-    color:var(--muted);
-    font-size:10px;
-}
-
-.weather-details{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-
-    gap:10px;
-
-    margin-top:22px;
-}
-
-.weather-detail{
-    padding:12px;
-
-    background:var(--green-soft);
-    border-radius:9px;
-}
-
-.weather-detail span{
-    display:block;
-    color:var(--muted);
-    font-size:8px;
-}
-
-.weather-detail strong{
-    display:block;
-    margin-top:5px;
-    font-size:11px;
-}
-
-/* PROGRESS */
-
-.progress-section{
-    background:var(--white);
-
-    border:1px solid var(--border);
-    border-radius:14px;
-
-    padding:19px 20px;
-
-    margin-bottom:23px;
-
-    box-shadow:var(--shadow);
-}
-
-.progress-header{
-    display:flex;
-    justify-content:space-between;
-
-    margin-bottom:11px;
-}
-
-.progress-header h2{
-    font-size:14px;
-}
-
-.progress-header span{
-    color:var(--green);
-    font-size:11px;
-    font-weight:700;
-}
-
-.progress{
-    width:100%;
-    height:7px;
-
-    background:#edf1ef;
-
-    border-radius:20px;
-
-    overflow:hidden;
-}
-
-.progress-fill{
-    width:75%;
-    height:100%;
-
-    background:var(--green);
-
-    border-radius:20px;
-}
-
-/* SERVICES */
-
-.services-title{
-    margin-bottom:13px;
-}
-
-.services-title h2{
-    font-size:17px;
-}
-
-.services-title p{
-    color:var(--muted);
-    font-size:9px;
-    margin-top:4px;
-}
-
-.services{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-
-    gap:13px;
-
-    margin-bottom:22px;
-}
-
-.service-card{
-    display:flex;
-    align-items:center;
-    gap:13px;
-
-    background:var(--white);
-
-    border:1px solid var(--border);
-    border-radius:13px;
-
-    padding:16px;
-
-    cursor:pointer;
-
-    box-shadow:var(--shadow);
-
-    transition:.25s ease;
-}
-
-.service-card:hover{
-    transform:translateY(-3px);
-    box-shadow:var(--shadow-hover);
-}
-
-.service-icon{
-    width:39px;
-    height:39px;
-
-    flex-shrink:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
+    color:var(--green-dark);
+    padding:11px 15px;
     border-radius:10px;
-
-    font-size:14px;
-}
-
-.service-text h3{
     font-size:11px;
-    color:var(--dark);
-}
-
-.service-text p{
-    color:var(--muted);
-    font-size:8px;
-    margin-top:4px;
-    line-height:1.4;
-}
-
-/* LOWER GRID */
-
-.lower-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:17px;
-
-    margin-bottom:17px;
-}
-
-.panel{
-    background:var(--white);
-
-    border:1px solid var(--border);
-    border-radius:14px;
-
-    padding:20px;
-
-    box-shadow:var(--shadow);
-}
-
-.panel-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-
-    margin-bottom:12px;
-}
-
-.panel-header h2{
-    font-size:15px;
-    color:var(--dark);
-}
-
-.panel-header p{
-    color:var(--muted);
-    font-size:9px;
-    margin-top:4px;
-}
-
-.panel-header i{
-    color:var(--green);
-}
-
-/* DISEASE */
-
-.disease-item{
-    display:flex;
-    align-items:center;
-    gap:11px;
-
-    padding:12px 0;
-
-    border-bottom:1px solid var(--border);
-}
-
-.disease-item:last-child{
-    border-bottom:none;
-}
-
-.disease-icon{
-    width:35px;
-    height:35px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:9px;
-
-    background:var(--red-light);
-    color:var(--red);
-}
-
-.disease-item strong{
-    display:block;
-    font-size:10px;
-}
-
-.disease-item small{
-    display:block;
-    color:var(--muted);
-    font-size:8px;
-    margin-top:3px;
-}
-
-/* MARKET */
-
-.market-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:12px 0;
-
-    border-bottom:1px solid var(--border);
-}
-
-.market-item:last-child{
-    border-bottom:none;
-}
-
-.market-name{
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
-
-.market-name i{
-    color:var(--green);
-    font-size:11px;
-}
-
-.market-name span{
-    font-size:10px;
     font-weight:600;
 }
 
-.market-price{
-    color:var(--green);
-    font-size:10px;
+.top-btn{
+    border:1px solid var(--border);
+    background:white;
+    color:var(--green-dark);
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+    font-size:16px;
+}
+
+.top-btn:hover{
+    background:var(--green-light);
+    transform:translateY(-2px);
+}
+
+.logout-btn{
+    border:0;
+    background:var(--danger);
+    color:white;
+    padding:12px 17px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:11px;
     font-weight:700;
+    transition:.2s;
 }
 
-/* FOOTER */
+.logout-btn:hover{
+    background:#bb2d3b;
+    transform:translateY(-2px);
+}
 
-.footer{
-    text-align:center;
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:28px;
+}
 
-    color:#9aa39e;
+.stat-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    display:flex;
+    align-items:center;
+    gap:17px;
+    box-shadow:var(--shadow);
+    transition:.25s;
+}
 
-    font-size:8px;
+.stat-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 35px rgba(16,61,37,.12);
+}
 
+.stat-icon{
+    width:54px;
+    height:54px;
+    border-radius:15px;
+    background:var(--green-light);
+    color:var(--green);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    flex-shrink:0;
+}
+
+.stat-info p{
+    color:var(--muted);
+    font-size:11px;
+    margin-bottom:6px;
+}
+
+.stat-info h2{
+    color:var(--text);
+    font-size:24px;
+    font-weight:750;
+}
+
+#farmerName{
+    max-width:180px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.section-title h2{
+    color:var(--text);
+    font-size:19px;
+}
+
+.search-box{
+    position:relative;
+}
+
+.search-box input{
+    width:240px;
+    height:42px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:0 14px;
+    outline:none;
+    font-size:12px;
+    background:white;
+    transition:.2s;
+}
+
+.search-box input:focus{
+    border-color:var(--green);
+    box-shadow:0 0 0 4px rgba(25,135,84,.08);
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    position:relative;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:23px;
+    text-decoration:none;
+    color:var(--text);
+    transition:.25s;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.card::after{
+    content:"";
+    position:absolute;
+    right:-30px;
+    top:-30px;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:var(--green-light);
+    opacity:.7;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#c7e3d2;
+    box-shadow:0 15px 35px rgba(16,61,37,.12);
+}
+
+.card-icon{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:var(--green-light);
+    color:var(--green);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin-bottom:16px;
+    position:relative;
+    z-index:2;
+}
+
+.card h3{
+    font-size:15px;
+    margin-bottom:8px;
+    position:relative;
+    z-index:2;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+    position:relative;
+    z-index:2;
+}
+
+.card-arrow{
+    position:absolute;
+    right:18px;
+    bottom:18px;
+    color:var(--green);
+    font-size:18px;
+    z-index:2;
+}
+
+.tools{
     margin-top:25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
 }
 
-/* DARK MODE */
-
-body.dark-mode{
-    --bg:#101713;
-    --white:#18211c;
-    --dark:#f0f5f2;
-    --text:#dbe5df;
-    --muted:#8f9c95;
-    --border:#27332c;
-    --green-soft:#1d2b23;
-
-    background:#101713;
-    color:#dbe5df;
+.tool-box{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:var(--shadow);
 }
 
-body.dark-mode .topbar h1,
-body.dark-mode .welcome h2,
-body.dark-mode .stat-card h2,
-body.dark-mode .weather-title h2,
-body.dark-mode .temperature,
-body.dark-mode .panel-header h2,
-body.dark-mode .service-text h3{
-    color:#f0f5f2;
+.tool-box h3{
+    color:var(--text);
+    font-size:14px;
+    margin-bottom:16px;
 }
 
-body.dark-mode #searchInput,
-body.dark-mode #darkBtn{
-    background:#18211c;
-    color:#dbe5df;
-    border-color:#27332c;
+.time{
+    color:var(--green);
+    font-size:27px;
+    font-weight:750;
 }
 
-/* RESPONSIVE */
+.report-btn{
+    width:100%;
+    height:43px;
+    border:0;
+    border-radius:10px;
+    background:var(--green);
+    color:white;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:700;
+    transition:.2s;
+}
 
-@media(max-width:1000px){
+.report-btn:hover{
+    background:#146c43;
+    transform:translateY(-2px);
+}
+
+.info-box{
+    margin-top:18px;
+    background:linear-gradient(135deg,#0f5132,#198754);
+    color:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 12px 30px rgba(15,81,50,.18);
+}
+
+.info-box h2{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.info-box p{
+    color:#d5ebdd;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.dark{
+    background:#101815;
+    color:#e9f5ed;
+}
+
+.dark .topbar,
+.dark .stat-card,
+.dark .card,
+.dark .tool-box{
+    background:#18231d;
+    border-color:#2b3c32;
+}
+
+.dark .welcome h1,
+.dark .stat-info h2,
+.dark .section-title h2,
+.dark .card h3,
+.dark .tool-box h3{
+    color:#edf8f0;
+}
+
+.dark .welcome p,
+.dark .stat-info p,
+.dark .card p{
+    color:#aebdb4;
+}
+
+.dark .search-box input{
+    background:#121b16;
+    color:white;
+    border-color:#35493d;
+}
+
+.dark .top-btn{
+    background:#18231d;
+    color:#bce5ca;
+    border-color:#35493d;
+}
+
+@media(max-width:1100px){
+
+    .sidebar{
+        width:220px;
+    }
+
+    .main{
+        margin-left:220px;
+        padding:22px;
+    }
 
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .services{
+    .cards{
         grid-template-columns:repeat(2,1fr);
     }
 
 }
 
-@media(max-width:800px){
+@media(max-width:750px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+        padding:18px;
+    }
+
+    .logo{
+        text-align:center;
+    }
+
+    .logo-icon{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .nav{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:6px;
+    }
+
+    .nav a{
+        margin-bottom:0;
+    }
 
     .main{
-        padding:20px;
+        margin-left:0;
+        padding:15px;
     }
 
     .topbar{
-        align-items:flex-start;
         flex-direction:column;
-        gap:14px;
+        align-items:flex-start;
     }
 
-    .top-right{
+    .top-actions{
+        width:100%;
+        flex-wrap:wrap;
+    }
+
+    .stats,
+    .cards,
+    .tools{
+        grid-template-columns:1fr;
+    }
+
+    .search-box{
         width:100%;
     }
 
-    #searchInput{
-        flex:1;
-        width:auto;
-    }
-
-    .welcome{
-        align-items:flex-start;
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .date-box{
-        text-align:left;
-    }
-
-    .weather-details{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .lower-grid{
-        grid-template-columns:1fr;
+    .search-box input{
+        width:100%;
     }
 
 }
 
-@media(max-width:550px){
+@media(max-width:480px){
 
-    .main{
-        padding:16px;
-    }
-
-    .stats{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
-    }
-
-    .stat-card{
-        padding:14px;
-    }
-
-    .stat-card h2{
-        font-size:20px;
-    }
-
-    .services{
+    .nav{
         grid-template-columns:1fr;
     }
 
-    .top-right{
-        flex-wrap:wrap;
+    .welcome h1{
+        font-size:21px;
     }
 
-    #searchInput{
-        width:100%;
-        flex-basis:100%;
-    }
-
-    .weather-details{
+    .top-actions{
+        display:grid;
         grid-template-columns:1fr 1fr;
+        width:100%;
+    }
+
+    .date-box{
+        grid-column:1/-1;
+        text-align:center;
+    }
+
+    .logout-btn{
+        width:100%;
+    }
+
+    .top-btn{
+        width:100%;
     }
 
 }
@@ -794,139 +584,108 @@ body.dark-mode #darkBtn{
 
 <body>
 
-<button id="menuBtn" class="menu-btn">
-☰
-</button>
+<aside class="sidebar">
 
-<div class="sidebar">
+<div class="logo">
 
-<h2>
-<i class="fa-solid fa-seedling"></i>
-Smart Agri
-</h2>
+<div class="logo-icon">
+🌱
+</div>
 
-<ul>
+<h2>Smart Agriculture</h2>
 
-<li>
-<a href="dashboard.html">
-<i class="fa-solid fa-house"></i>
-Dashboard
-</a>
-</li>
-
-<li>
-<a href="weather.html">
-<i class="fa-solid fa-cloud-sun"></i>
-Weather
-</a>
-</li>
-
-<li>
-<a href="crop.html">
-<i class="fa-solid fa-leaf"></i>
-Crop Upload
-</a>
-</li>
-
-<li>
-<a href="disease.html">
-<i class="fa-solid fa-bug"></i>
-Disease
-</a>
-</li>
-
-<li>
-<a href="solution.html">
-<i class="fa-solid fa-pills"></i>
-Solution
-</a>
-</li>
-
-<li>
-<a href="market.html">
-<i class="fa-solid fa-chart-line"></i>
-Market
-</a>
-</li>
-
-<li>
-<a href="scheme.html">
-<i class="fa-solid fa-building-columns"></i>
-Scheme
-</a>
-</li>
-
-<li>
-<a href="profile.html">
-<i class="fa-solid fa-user"></i>
-Profile
-</a>
-</li>
-
-<li>
-<a href="#" id="logoutBtn">
-<i class="fa-solid fa-right-from-bracket"></i>
-Logout
-</a>
-</li>
-
-</ul>
+<p>Smart Agriculture Platform</p>
 
 </div>
 
-<div class="main">
+<nav class="nav">
+
+<a href="dashboard.html" class="active">
+<span class="nav-icon">🏠</span>
+Dashboard
+</a>
+
+<a href="weather.html">
+<span class="nav-icon">☀️</span>
+Weather
+</a>
+
+<a href="crop.html">
+<span class="nav-icon">🌾</span>
+Crop Management
+</a>
+
+<a href="disease.html">
+<span class="nav-icon">🦠</span>
+Disease Detection
+</a>
+
+<a href="market.html">
+<span class="nav-icon">📈</span>
+Market
+</a>
+
+<a href="scheme.html">
+<span class="nav-icon">🏛️</span>
+Government Schemes
+</a>
+
+<a href="profile.html">
+<span class="nav-icon">👤</span>
+Profile
+</a>
+
+</nav>
+
+</aside>
+
+
+<main class="main">
+
 
 <div class="topbar">
 
-<div>
-
-<h1>
-Smart Agri
-<span>Dashboard</span>
-</h1>
-
-<p class="top-subtitle">
-Smart farming management system
-</p>
-
-</div>
-
-<div class="top-right">
-
-<input
-id="searchInput"
-type="text"
-placeholder="Search..."
->
-
-<button id="darkBtn">
-<i class="fa-solid fa-moon"></i>
-</button>
-
-</div>
-
-</div>
-
-
 <div class="welcome">
 
-<div>
-
-<h2>
-Welcome, <span id="farmerName">Farmer</span>
-</h2>
+<h1>
+Welcome,
+<span id="welcomeUser">Farmer</span>
+</h1>
 
 <p>
-Manage your farm, crops and agricultural activities from one place.
+Smart tools and information for better farming.
 </p>
 
 </div>
+
+
+<div class="top-actions">
 
 <div class="date-box">
 
-<span>Today</span>
+📅
+<span id="todayDate">Today</span>
 
-<strong id="todayDate"></strong>
+</div>
+
+
+<button
+class="top-btn"
+id="darkBtn"
+title="Dark Mode">
+
+🌙
+
+</button>
+
+
+<button
+class="logout-btn"
+id="logoutBtn">
+
+Logout
+
+</button>
 
 </div>
 
@@ -935,167 +694,52 @@ Manage your farm, crops and agricultural activities from one place.
 
 <div class="stats">
 
+
 <div class="stat-card">
 
-<div class="stat-top">
-
-<div class="stat-icon green">
-<i class="fa-solid fa-seedling"></i>
+<div class="stat-icon">
+🌾
 </div>
 
-<i class="fa-solid fa-arrow-trend-up"
-style="color:#72b88f;font-size:10px;">
-</i>
-
-</div>
-
-<h2 id="cropCount">
-0
-</h2>
+<div class="stat-info">
 
 <p>Total Crops</p>
 
-</div>
-
-
-<div class="stat-card">
-
-<div class="stat-top">
-
-<div class="stat-icon blue">
-<i class="fa-solid fa-building-columns"></i>
-</div>
-
-<i class="fa-solid fa-check"
-style="color:#72a7d5;font-size:10px;">
-</i>
+<h2 id="cropCount">0</h2>
 
 </div>
-
-<h2>
-5
-</h2>
-
-<p>Government Schemes</p>
 
 </div>
 
 
 <div class="stat-card">
 
-<div class="stat-top">
-
-<div class="stat-icon gold">
-<i class="fa-solid fa-cloud-sun"></i>
+<div class="stat-icon">
+🦠
 </div>
 
-<i class="fa-solid fa-circle"
-style="color:#d0aa61;font-size:7px;">
-</i>
+<div class="stat-info">
+
+<p>Disease Records</p>
+
+<h2 id="diseaseCount">0</h2>
 
 </div>
-
-<h2>
-30°C
-</h2>
-
-<p>Current Weather</p>
 
 </div>
 
 
 <div class="stat-card">
 
-<div class="stat-top">
-
-<div class="stat-icon red">
-<i class="fa-solid fa-shield-virus"></i>
+<div class="stat-icon">
+👨‍🌾
 </div>
 
-<i class="fa-solid fa-check"
-style="color:#c97b81;font-size:10px;">
-</i>
+<div class="stat-info">
 
-</div>
+<p>Farmer</p>
 
-<h2 id="diseaseCount">
-0
-</h2>
-
-<p>Disease Checks</p>
-
-</div>
-
-</div>
-
-
-<div class="content-grid">
-
-<div class="weather-card">
-
-<div class="weather-top">
-
-<div>
-
-<h2>Weather</h2>
-
-<p class="weather-location">
-Today's farm conditions
-</p>
-
-</div>
-
-<div class="weather-icon">
-
-<i class="fa-solid fa-cloud-sun"></i>
-
-</div>
-
-</div>
-
-
-<div class="temperature">
-30°C
-</div>
-
-<p class="weather-condition">
-Partly cloudy
-</p>
-
-
-<div class="weather-details">
-
-<div class="weather-detail">
-
-<span>Humidity</span>
-
-<strong>75%</strong>
-
-</div>
-
-<div class="weather-detail">
-
-<span>Rain Chance</span>
-
-<strong>40%</strong>
-
-</div>
-
-<div class="weather-detail">
-
-<span>Wind</span>
-
-<strong>12 km/h</strong>
-
-</div>
-
-<div class="weather-detail">
-
-<span>Feels Like</span>
-
-<strong>31°C</strong>
-
-</div>
+<h2 id="farmerName">Farmer</h2>
 
 </div>
 
@@ -1104,351 +748,188 @@ Partly cloudy
 </div>
 
 
-<div class="progress-section">
+<div class="section-title">
 
-<div class="progress-header">
+<h2>Quick Access</h2>
 
-<h2>
-🌱 Crop Growth Progress
-</h2>
+<div class="search-box">
 
-<span>
-75%
-</span>
-
-</div>
-
-<div class="progress">
-
-<div class="progress-fill"></div>
+<input
+type="text"
+id="searchInput"
+placeholder="Search dashboard...">
 
 </div>
 
 </div>
 
 
-<div class="services-title">
+<div class="cards">
 
-<h2>Farm Services</h2>
 
-<p>
-Quick access to your agriculture tools
-</p>
+<a href="weather.html" class="card">
 
+<div class="card-icon">
+☀️
 </div>
-
-
-<div class="services">
-
-
-<div
-class="service-card"
-onclick="location.href='weather.html'">
-
-<div class="service-icon blue">
-
-<i class="fa-solid fa-cloud-sun"></i>
-
-</div>
-
-<div class="service-text">
 
 <h3>Weather</h3>
 
-<p>View weather updates</p>
+<p>
+Check current weather information and farming conditions.
+</p>
 
+<span class="card-arrow">→</span>
+
+</a>
+
+
+<a href="crop.html" class="card">
+
+<div class="card-icon">
+🌾
 </div>
-
-</div>
-
-
-<div
-class="service-card"
-onclick="location.href='crop.html'">
-
-<div class="service-icon green">
-
-<i class="fa-solid fa-seedling"></i>
-
-</div>
-
-<div class="service-text">
 
 <h3>Crop Management</h3>
 
-<p>Manage your crops</p>
+<p>
+Manage crop information and maintain your crop records.
+</p>
 
+<span class="card-arrow">→</span>
+
+</a>
+
+
+<a href="disease.html" class="card">
+
+<div class="card-icon">
+🦠
 </div>
-
-</div>
-
-
-<div
-class="service-card"
-onclick="location.href='disease.html'">
-
-<div class="service-icon red">
-
-<i class="fa-solid fa-microscope"></i>
-
-</div>
-
-<div class="service-text">
 
 <h3>Disease Detection</h3>
 
-<p>Check crop diseases</p>
+<p>
+Identify crop diseases and view suitable solutions.
+</p>
 
+<span class="card-arrow">→</span>
+
+</a>
+
+
+<a href="market.html" class="card">
+
+<div class="card-icon">
+📈
 </div>
 
+<h3>Market Prices</h3>
+
+<p>
+Check agricultural market information and crop prices.
+</p>
+
+<span class="card-arrow">→</span>
+
+</a>
+
+
+<a href="scheme.html" class="card">
+
+<div class="card-icon">
+🏛️
 </div>
-
-
-<div
-class="service-card"
-onclick="location.href='solution.html'">
-
-<div class="service-icon green">
-
-<i class="fa-solid fa-kit-medical"></i>
-
-</div>
-
-<div class="service-text">
-
-<h3>Solutions</h3>
-
-<p>Find crop solutions</p>
-
-</div>
-
-</div>
-
-
-<div
-class="service-card"
-onclick="location.href='market.html'">
-
-<div class="service-icon gold">
-
-<i class="fa-solid fa-chart-line"></i>
-
-</div>
-
-<div class="service-text">
-
-<h3>Market</h3>
-
-<p>Check market prices</p>
-
-</div>
-
-</div>
-
-
-<div
-class="service-card"
-onclick="location.href='scheme.html'">
-
-<div class="service-icon blue">
-
-<i class="fa-solid fa-building-columns"></i>
-
-</div>
-
-<div class="service-text">
 
 <h3>Government Schemes</h3>
 
-<p>View farmer schemes</p>
+<p>
+Explore useful government schemes and farmer benefits.
+</p>
 
+<span class="card-arrow">→</span>
+
+</a>
+
+
+<a href="profile.html" class="card">
+
+<div class="card-icon">
+👤
 </div>
 
-</div>
+<h3>Farmer Profile</h3>
 
-</div>
+<p>
+View and manage your farmer profile information.
+</p>
 
+<span class="card-arrow">→</span>
 
-<div class="lower-grid">
-
-
-<div class="panel">
-
-<div class="panel-header">
-
-<div>
-
-<h2>Disease Monitoring</h2>
-
-<p>Crop health status</p>
-
-</div>
-
-<i class="fa-solid fa-shield-virus"></i>
-
-</div>
-
-
-<div class="disease-item">
-
-<div class="disease-icon">
-<i class="fa-solid fa-microscope"></i>
-</div>
-
-<div>
-
-<strong>Disease Detection</strong>
-
-<small>
-Ready to check your crop
-</small>
-
-</div>
+</a>
 
 </div>
 
 
-<div class="disease-item">
+<div class="tools">
 
-<div class="disease-icon">
-<i class="fa-solid fa-leaf"></i>
-</div>
 
-<div>
+<div class="tool-box">
 
-<strong>Crop Health</strong>
+<h3>
+🕒 Current Time
+</h3>
 
-<small>
-Regular monitoring recommended
-</small>
+<div
+class="time"
+id="currentTime">
+
+00:00:00
 
 </div>
 
 </div>
 
 
-<div class="disease-item">
+<div class="tool-box">
 
-<div class="disease-icon">
-<i class="fa-solid fa-circle-check"></i>
-</div>
+<h3>
+📄 Crop Report
+</h3>
 
-<div>
+<button
+class="report-btn"
+onclick="downloadReport()">
 
-<strong>Farm Status</strong>
+Download Crop Report
 
-<small>
-Your farm monitoring is active
-</small>
-
-</div>
+</button>
 
 </div>
 
 </div>
 
 
-<div class="panel">
+<div class="info-box">
 
-<div class="panel-header">
+<h2>
+🌱 Smart Agriculture Platform
+</h2>
 
-<div>
-
-<h2>Market Prices</h2>
-
-<p>Sample crop market rates</p>
-
-</div>
-
-<i class="fa-solid fa-chart-line"></i>
+<p>
+Use weather information, crop management, disease detection,
+market information and government schemes to make better
+farming decisions.
+</p>
 
 </div>
 
 
-<div class="market-item">
-
-<div class="market-name">
-
-<i class="fa-solid fa-wheat-awn"></i>
-
-<span>Wheat</span>
-
-</div>
-
-<div class="market-price">
-₹2,450
-</div>
-
-</div>
-
-
-<div class="market-item">
-
-<div class="market-name">
-
-<i class="fa-solid fa-seedling"></i>
-
-<span>Rice</span>
-
-</div>
-
-<div class="market-price">
-₹3,200
-</div>
-
-</div>
-
-
-<div class="market-item">
-
-<div class="market-name">
-
-<i class="fa-solid fa-leaf"></i>
-
-<span>Cotton</span>
-
-</div>
-
-<div class="market-price">
-₹6,800
-</div>
-
-</div>
-
-
-<div class="market-item">
-
-<div class="market-name">
-
-<i class="fa-solid fa-seedling"></i>
-
-<span>Soybean</span>
-
-</div>
-
-<div class="market-price">
-₹4,600
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="footer">
-
-Smart Agri • Smart Farming Management System
-
-</div>
-
-</div>
+</main>
 
 
 <script src="js/dashboard.js"></script>
 
-<script src="js/menu.js"></script>
-
 </body>
+
 </html>
