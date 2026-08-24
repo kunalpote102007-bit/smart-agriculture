@@ -1,36 +1,41 @@
 const baseDiseases = [
+
     {
         crop: "Rice",
         disease: "Rice Blast",
         symptoms: "Diamond shaped brown lesions on leaves, leaf drying and reduced growth.",
-        treatment: "Remove infected plant parts and use recommended fungicide.",
+        treatment: "Remove infected plant parts and use recommended fungicide according to local agricultural guidance.",
         prevention: "Use resistant varieties, balanced fertilizer and proper field sanitation.",
         severity: "High"
     },
+
     {
         crop: "Rice",
         disease: "Bacterial Leaf Blight",
         symptoms: "Yellowing from leaf tips, water-soaked lesions and leaf drying.",
-        treatment: "Remove severely infected plants and follow recommended disease management.",
+        treatment: "Remove severely infected plants and follow recommended disease management practices.",
         prevention: "Use clean seed, resistant varieties and avoid excessive nitrogen.",
         severity: "High"
     },
+
     {
         crop: "Rice",
         disease: "Sheath Blight",
-        symptoms: "Oval greenish-grey lesions on leaf sheaths.",
+        symptoms: "Oval greenish-grey lesions on leaf sheaths which may spread upward.",
         treatment: "Improve field management and use recommended fungicide.",
         prevention: "Avoid excessive nitrogen and maintain proper plant spacing.",
         severity: "High"
     },
+
     {
         crop: "Rice",
         disease: "Brown Spot",
-        symptoms: "Brown circular spots on leaves with yellow halos.",
+        symptoms: "Brown circular spots with yellow halos on leaves and reduced grain quality.",
         treatment: "Improve plant nutrition and use recommended fungicide.",
         prevention: "Use healthy seed and maintain balanced soil fertility.",
         severity: "Medium"
     },
+
     {
         crop: "Rice",
         disease: "Tungro Disease",
@@ -39,22 +44,25 @@ const baseDiseases = [
         prevention: "Use resistant varieties and manage leafhopper populations.",
         severity: "Very High"
     },
+
     {
         crop: "Wheat",
         disease: "Wheat Rust",
-        symptoms: "Orange, yellow or brown rust-colored pustules on leaves.",
+        symptoms: "Orange, yellow or brown rust-colored pustules on leaves and stems.",
         treatment: "Use suitable fungicide according to agricultural recommendations.",
         prevention: "Grow resistant varieties and maintain field sanitation.",
         severity: "High"
     },
+
     {
         crop: "Wheat",
         disease: "Powdery Mildew",
-        symptoms: "White powder-like growth on leaves and stems.",
+        symptoms: "White powder-like fungal growth on leaves and stems.",
         treatment: "Use recommended fungicide and improve air circulation.",
         prevention: "Avoid excessive nitrogen and dense planting.",
         severity: "Medium"
     },
+
     {
         crop: "Wheat",
         disease: "Loose Smut",
@@ -63,14 +71,16 @@ const baseDiseases = [
         prevention: "Use certified seed and resistant varieties.",
         severity: "High"
     },
+
     {
         crop: "Wheat",
         disease: "Septoria Leaf Blotch",
-        symptoms: "Brown lesions with dark fruiting bodies on leaves.",
+        symptoms: "Brown lesions with dark fruiting bodies appearing on wheat leaves.",
         treatment: "Use recommended fungicide and remove infected residues.",
-        prevention: "Crop rotation and use resistant varieties.",
+        prevention: "Practice crop rotation and use resistant varieties.",
         severity: "Medium"
     },
+
     {
         crop: "Cotton",
         disease: "Cotton Leaf Curl Virus",
@@ -79,30 +89,34 @@ const baseDiseases = [
         prevention: "Use resistant varieties and manage whitefly populations.",
         severity: "Very High"
     },
+
     {
         crop: "Cotton",
         disease: "Alternaria Leaf Spot",
-        symptoms: "Brown circular spots with concentric rings on leaves.",
+        symptoms: "Brown circular spots with concentric rings on cotton leaves.",
         treatment: "Remove infected debris and use recommended fungicide.",
         prevention: "Use healthy seed and maintain proper field sanitation.",
         severity: "Medium"
     },
+
     {
         crop: "Cotton",
         disease: "Bacterial Blight",
         symptoms: "Angular water-soaked lesions and dark spots on leaves.",
-        treatment: "Remove infected plant material and use recommended management.",
+        treatment: "Remove infected plant material and follow recommended disease management.",
         prevention: "Use disease-free seed and resistant varieties.",
         severity: "High"
     },
+
     {
         crop: "Cotton",
         disease: "Fusarium Wilt",
-        symptoms: "Yellowing, wilting and vascular discoloration.",
-        treatment: "Remove infected plants and follow soil disease management.",
+        symptoms: "Yellowing, wilting and vascular discoloration of plants.",
+        treatment: "Remove infected plants and follow soil disease management practices.",
         prevention: "Use resistant varieties and crop rotation.",
         severity: "High"
     },
+
     {
         crop: "Soybean",
         disease: "Soybean Rust",
@@ -111,6 +125,7 @@ const baseDiseases = [
         prevention: "Use resistant varieties and monitor fields regularly.",
         severity: "High"
     },
+
     {
         crop: "Soybean",
         disease: "Frogeye Leaf Spot",
@@ -119,6 +134,7 @@ const baseDiseases = [
         prevention: "Use clean seed and crop rotation.",
         severity: "Medium"
     },
+
     {
         crop: "Soybean",
         disease: "Downy Mildew",
@@ -127,6 +143,7 @@ const baseDiseases = [
         prevention: "Use healthy seed and maintain proper spacing.",
         severity: "Medium"
     },
+
     {
         crop: "Sugarcane",
         disease: "Red Rot",
@@ -135,6 +152,7 @@ const baseDiseases = [
         prevention: "Use disease-free setts and resistant varieties.",
         severity: "Very High"
     },
+
     {
         crop: "Sugarcane",
         disease: "Smut",
@@ -143,6 +161,7 @@ const baseDiseases = [
         prevention: "Use resistant varieties and disease-free setts.",
         severity: "High"
     },
+
     {
         crop: "Sugarcane",
         disease: "Wilt",
@@ -151,6 +170,7 @@ const baseDiseases = [
         prevention: "Use healthy planting material and resistant varieties.",
         severity: "High"
     },
+
     {
         crop: "Sugarcane",
         disease: "Grassy Shoot Disease",
@@ -159,6 +179,7 @@ const baseDiseases = [
         prevention: "Use disease-free planting material.",
         severity: "Very High"
     },
+
     {
         crop: "Tomato",
         disease: "Early Blight",
@@ -167,6 +188,7 @@ const baseDiseases = [
         prevention: "Avoid overhead irrigation and maintain sanitation.",
         severity: "High"
     },
+
     {
         crop: "Tomato",
         disease: "Late Blight",
@@ -175,6 +197,7 @@ const baseDiseases = [
         prevention: "Improve air circulation and avoid prolonged leaf wetness.",
         severity: "Very High"
     },
+
     {
         crop: "Tomato",
         disease: "Tomato Mosaic Virus",
@@ -183,6 +206,7 @@ const baseDiseases = [
         prevention: "Use clean tools, healthy seedlings and resistant varieties.",
         severity: "High"
     },
+
     {
         crop: "Tomato",
         disease: "Bacterial Wilt",
@@ -191,6 +215,7 @@ const baseDiseases = [
         prevention: "Use resistant varieties and clean planting material.",
         severity: "Very High"
     },
+
     {
         crop: "Tomato",
         disease: "Septoria Leaf Spot",
@@ -199,6 +224,7 @@ const baseDiseases = [
         prevention: "Avoid overhead watering and maintain sanitation.",
         severity: "Medium"
     },
+
     {
         crop: "Potato",
         disease: "Potato Late Blight",
@@ -207,6 +233,7 @@ const baseDiseases = [
         prevention: "Use certified seed and maintain good field sanitation.",
         severity: "Very High"
     },
+
     {
         crop: "Potato",
         disease: "Potato Early Blight",
@@ -215,6 +242,7 @@ const baseDiseases = [
         prevention: "Practice crop rotation and maintain plant nutrition.",
         severity: "Medium"
     },
+
     {
         crop: "Potato",
         disease: "Common Scab",
@@ -223,22 +251,25 @@ const baseDiseases = [
         prevention: "Use certified seed and maintain proper soil moisture.",
         severity: "Medium"
     },
+
     {
         crop: "Maize",
         disease: "Northern Corn Leaf Blight",
         symptoms: "Long grey-green lesions on maize leaves.",
         treatment: "Use resistant hybrids and recommended fungicide.",
-        prevention: "Crop rotation and removal of infected residues.",
+        prevention: "Practice crop rotation and remove infected residues.",
         severity: "High"
     },
+
     {
         crop: "Maize",
         disease: "Common Rust",
-        symptoms: "Small reddish-brown pustules on leaves.",
+        symptoms: "Small reddish-brown pustules on maize leaves.",
         treatment: "Use resistant varieties and suitable fungicide when needed.",
         prevention: "Use resistant hybrids and maintain crop health.",
         severity: "Medium"
     },
+
     {
         crop: "Maize",
         disease: "Common Smut",
@@ -247,14 +278,16 @@ const baseDiseases = [
         prevention: "Avoid plant injury and use healthy seed.",
         severity: "Medium"
     },
+
     {
         crop: "Groundnut",
         disease: "Groundnut Leaf Spot",
-        symptoms: "Brown or black spots appearing on leaves.",
+        symptoms: "Brown or black spots appearing on groundnut leaves.",
         treatment: "Use recommended fungicide and remove crop debris.",
-        prevention: "Crop rotation and proper field sanitation.",
+        prevention: "Practice crop rotation and proper field sanitation.",
         severity: "Medium"
     },
+
     {
         crop: "Groundnut",
         disease: "Groundnut Rust",
@@ -263,6 +296,7 @@ const baseDiseases = [
         prevention: "Use resistant varieties and maintain field sanitation.",
         severity: "Medium"
     },
+
     {
         crop: "Chilli",
         disease: "Chilli Anthracnose",
@@ -271,6 +305,7 @@ const baseDiseases = [
         prevention: "Use healthy seed and avoid excess moisture.",
         severity: "High"
     },
+
     {
         crop: "Chilli",
         disease: "Chilli Leaf Curl",
@@ -279,6 +314,7 @@ const baseDiseases = [
         prevention: "Manage thrips and whiteflies and use healthy seedlings.",
         severity: "High"
     },
+
     {
         crop: "Chilli",
         disease: "Bacterial Leaf Spot",
@@ -287,6 +323,7 @@ const baseDiseases = [
         prevention: "Use clean seed and avoid excessive moisture.",
         severity: "Medium"
     },
+
     {
         crop: "Onion",
         disease: "Purple Blotch",
@@ -295,6 +332,7 @@ const baseDiseases = [
         prevention: "Improve drainage and avoid prolonged leaf wetness.",
         severity: "Medium"
     },
+
     {
         crop: "Onion",
         disease: "Downy Mildew",
@@ -303,6 +341,7 @@ const baseDiseases = [
         prevention: "Avoid excess irrigation and maintain proper spacing.",
         severity: "High"
     },
+
     {
         crop: "Mango",
         disease: "Mango Anthracnose",
@@ -311,6 +350,7 @@ const baseDiseases = [
         prevention: "Prune canopy for ventilation and maintain sanitation.",
         severity: "High"
     },
+
     {
         crop: "Mango",
         disease: "Powdery Mildew",
@@ -319,6 +359,7 @@ const baseDiseases = [
         prevention: "Improve air circulation and avoid excessive humidity.",
         severity: "High"
     },
+
     {
         crop: "Mango",
         disease: "Bacterial Black Spot",
@@ -327,6 +368,7 @@ const baseDiseases = [
         prevention: "Use healthy planting material and maintain orchard sanitation.",
         severity: "High"
     },
+
     {
         crop: "Banana",
         disease: "Black Sigatoka",
@@ -335,6 +377,7 @@ const baseDiseases = [
         prevention: "Maintain good drainage and field sanitation.",
         severity: "High"
     },
+
     {
         crop: "Banana",
         disease: "Panama Disease",
@@ -343,6 +386,7 @@ const baseDiseases = [
         prevention: "Use disease-free planting material and resistant varieties.",
         severity: "Very High"
     },
+
     {
         crop: "Grape",
         disease: "Downy Mildew",
@@ -351,6 +395,7 @@ const baseDiseases = [
         prevention: "Maintain proper spacing and avoid excess humidity.",
         severity: "High"
     },
+
     {
         crop: "Grape",
         disease: "Powdery Mildew",
@@ -359,6 +404,7 @@ const baseDiseases = [
         prevention: "Avoid excessive humidity and maintain proper canopy management.",
         severity: "High"
     },
+
     {
         crop: "Apple",
         disease: "Apple Scab",
@@ -367,6 +413,7 @@ const baseDiseases = [
         prevention: "Remove fallen leaves and maintain orchard sanitation.",
         severity: "High"
     },
+
     {
         crop: "Apple",
         disease: "Fire Blight",
@@ -375,6 +422,7 @@ const baseDiseases = [
         prevention: "Use healthy planting material and disinfect pruning tools.",
         severity: "Very High"
     },
+
     {
         crop: "Barley",
         disease: "Barley Leaf Rust",
@@ -383,6 +431,7 @@ const baseDiseases = [
         prevention: "Maintain field sanitation and balanced nutrition.",
         severity: "Medium"
     },
+
     {
         crop: "Mustard",
         disease: "White Rust",
@@ -391,6 +440,7 @@ const baseDiseases = [
         prevention: "Use healthy seed and avoid excessive moisture.",
         severity: "Medium"
     },
+
     {
         crop: "Pigeon Pea",
         disease: "Fusarium Wilt",
@@ -399,6 +449,7 @@ const baseDiseases = [
         prevention: "Use resistant varieties and crop rotation.",
         severity: "High"
     },
+
     {
         crop: "Pigeon Pea",
         disease: "Sterility Mosaic Disease",
@@ -406,25 +457,130 @@ const baseDiseases = [
         treatment: "Control mite vectors and remove infected plants.",
         prevention: "Use resistant varieties and healthy planting material.",
         severity: "Very High"
+    },
+
+    {
+        crop: "Brinjal",
+        disease: "Bacterial Wilt",
+        symptoms: "Sudden wilting of leaves and branches while foliage may remain green.",
+        treatment: "Remove infected plants and follow recommended soil disease management.",
+        prevention: "Use resistant varieties, clean seedlings and proper field sanitation.",
+        severity: "Very High"
+    },
+
+    {
+        crop: "Brinjal",
+        disease: "Phomopsis Blight",
+        symptoms: "Brown circular spots on leaves and sunken lesions on fruits.",
+        treatment: "Remove infected fruits and plant debris and use recommended fungicide.",
+        prevention: "Use healthy seed and maintain field sanitation.",
+        severity: "High"
+    },
+
+    {
+        crop: "Okra",
+        disease: "Yellow Vein Mosaic",
+        symptoms: "Yellow network pattern along leaf veins with reduced plant growth.",
+        treatment: "Control whitefly vectors and remove severely infected plants.",
+        prevention: "Use resistant varieties and manage whitefly populations.",
+        severity: "Very High"
+    },
+
+    {
+        crop: "Okra",
+        disease: "Powdery Mildew",
+        symptoms: "White powdery growth on leaves which may cause premature leaf fall.",
+        treatment: "Use recommended fungicide and improve air circulation.",
+        prevention: "Avoid dense planting and excessive humidity.",
+        severity: "Medium"
+    },
+
+    {
+        crop: "Cucumber",
+        disease: "Downy Mildew",
+        symptoms: "Yellow angular leaf spots followed by browning and leaf drying.",
+        treatment: "Use recommended fungicide and improve ventilation.",
+        prevention: "Avoid prolonged leaf wetness and provide adequate spacing.",
+        severity: "High"
+    },
+
+    {
+        crop: "Cucumber",
+        disease: "Powdery Mildew",
+        symptoms: "White powdery patches on leaves and stems.",
+        treatment: "Use suitable fungicide according to local recommendations.",
+        prevention: "Maintain good air circulation and avoid excessive humidity.",
+        severity: "Medium"
+    },
+
+    {
+        crop: "Papaya",
+        disease: "Papaya Ring Spot Virus",
+        symptoms: "Mosaic leaves, ring-shaped marks on fruits and reduced growth.",
+        treatment: "Remove infected plants and manage aphid vectors.",
+        prevention: "Use healthy seedlings and control aphid populations.",
+        severity: "Very High"
+    },
+
+    {
+        crop: "Papaya",
+        disease: "Papaya Powdery Mildew",
+        symptoms: "White fungal growth on leaves and young plant parts.",
+        treatment: "Use recommended fungicide and improve ventilation.",
+        prevention: "Avoid excessive humidity and maintain plant spacing.",
+        severity: "Medium"
+    },
+
+    {
+        crop: "Guava",
+        disease: "Guava Wilt",
+        symptoms: "Yellowing, wilting and gradual drying of guava plants.",
+        treatment: "Remove severely affected plants and improve soil disease management.",
+        prevention: "Use healthy planting material and maintain orchard sanitation.",
+        severity: "Very High"
+    },
+
+    {
+        crop: "Guava",
+        disease: "Anthracnose",
+        symptoms: "Dark sunken lesions on leaves, shoots and fruits.",
+        treatment: "Remove infected parts and use recommended fungicide.",
+        prevention: "Maintain orchard sanitation and improve canopy ventilation.",
+        severity: "High"
     }
+
 ];
 
 const diseaseDatabase = [];
 
 for (let i = 0; i < 1200; i++) {
 
-    const base = baseDiseases[i % baseDiseases.length];
+    const base =
+        baseDiseases[i % baseDiseases.length];
 
     diseaseDatabase.push({
+
         id: i + 1,
+
         crop: base.crop,
+
         disease: base.disease,
+
         symptoms: base.symptoms,
+
         treatment: base.treatment,
+
         prevention: base.prevention,
+
         severity: base.severity,
+
         confidence: 90 + (i % 10)
+
     });
+
 }
 
-console.log("Disease Database Loaded:", diseaseDatabase.length);
+console.log(
+    "Disease Database Loaded:",
+    diseaseDatabase.length
+);
